@@ -1,0 +1,264 @@
+﻿1. What university are you currently enrolled in?
+   1. University of Glasgow
+   2. University of Edinburgh
+   3. University of Dundee
+   4. University of Aberdeen
+   5. University of St Andrews
+   6. University of Strathclyde
+   7. Heriot-Watt University
+   8. University of Dundee
+   9. University of Stirling
+   10. Edinburgh Napier University
+   11. Robert Gordon University
+   12. Glasgow Caledonian University
+   13. Abertay University
+   14. Queen Margaret University
+   15. The University of the West of Scotland
+   16. University of the Highlands and Islands
+   17. Other
+2. What is your favorite music genre?
+   1. Rock
+   2. Pop
+   3. Indie
+   4. Country 
+   5. R&B
+   6. Jazz
+   7. Hip Hop
+   8. Drill
+3. What is your favorite sport?
+   1. Football
+   2. Horses riding
+   3. Dancing
+   4. Basketball
+   5. Quidditch 
+   6. Snowboard
+   7. Fencing
+   8. Ice hockey
+   9. Gymnastics 
+4. If you had to eat food from one country for the rest of your life which would it be?
+   1. Italian
+   2. Greek 
+   3. Spanish
+   4. American
+   5. British
+   6. French
+   7. Korean 
+   8. Japanese
+   9. Mexican
+   10. Thai
+5. What is the best pass time in your opinion?
+   1. Watching a movie
+   2. Hike 
+   3. Reading
+   4. Smoking
+   5. Video games
+   6. Walking
+   7. Working out
+   8. Cooking
+   9. Studying 
+   10. Chess
+   11. Board games/card games
+   12. Listening to music
+   13. Sudokus
+6. What do you study?
+   1. Philosophy 
+   2. Math
+   3. Literature
+   4. Politics 
+   5. Languages 
+   6. Engineering
+   7. Computer Science
+   8. Economics
+   9. Education
+   10. Arts 
+   11. Law
+   12. Media
+   13. Bio-med
+7. Which of the following would be your ideal date?
+   1. Beach sunset picnic 
+   2. Art gallery
+   3. Cooking and movie night
+   4. Cinema 
+   5. People watching
+   6. Study date
+   7. Bar / club
+   8. Dinner at a restaurant
+   9. Hike
+   10. Park walk
+   11. Adult soft play place
+   12. Sporting event
+8. What is your favorite time of day?
+   1. Night
+   2. Morning
+   3. Evening 
+   4. Midday
+   5. Afternoon
+9. What superpower would you choose if you could?
+   1. Reading  minds
+   2. Water bending
+   3. Super speed
+   4. Flying 
+   5. X-ray vision
+   6. Ability to see the future
+   7. Control of the weather
+   8. Teletransportation 
+   9. Invisibility
+   10. Time travel
+10. What is your favorite animal?
+   1. Zebra
+   2. Deer
+   3. Tiger 
+   4. Red panda
+   5. Shark
+   6. Horses
+   7. Dolphin
+   8. Bear
+   9. Snake
+   10. Panther 
+   11. Human
+   12. Monkey
+11. What would you consider to be an ideal holiday?
+   1. Camping trip
+   2. Hiking 
+   3. Interrail
+   4. Trip to a tropical country
+   5. Road trip
+   6. Family trip
+   7. Beach holiday
+   8. Skiing trip
+   9. Trip to NYC
+12. What is your favorite movie genre?
+   1. Psychological thrillers 
+   2. Historical
+   3. Romcom
+   4. War
+   5. Adventure
+   6. Fantasy
+   7. Scifi
+   8. Horror
+   9. Romantic
+   10. Period piece
+   11. Action 
+13. Favorite season of the year:
+   1. Summer
+   2. Fall
+   3. Winter
+   4. Spring
+14. What do you value most in a person?
+   1. Honesty
+   2. Intelligence 
+   3. Good looks                           
+   4. Economic standing
+   5. Class
+   6. Culture
+   7. Loyalty 
+   8. Respect
+   9. Family-oriented
+   10. Trustworthy
+15. What is your go-to guilty pleasure?
+   1. Weed
+   2. Sweets
+   3. Shit TV
+   4. Interactions with stranges
+   5. Alcohol
+   6. Binge eating
+   7. Spending money
+   8. Pizza
+   9. Youtube 
+16. Favorite meal of the day:
+   1. Dinner
+   2. Breakfast
+   3. Lunch
+   4. Snack
+   5. Tea
+   6. Brunch
+17. What is your favorite tv show
+   1. Rome
+   2. Avatar the last air bender
+   3. Anne with an e
+   4. Sense8
+   5. GOT
+   6. Friends
+   7. Bigmouth
+   8. The office
+   9. 13 reasons why
+   10. Peaky blinders
+   11. Sherlock
+   12. Slasher
+   13. Kakegurui
+   14. Inbetweeners
+   15. Shameless
+   16. Gossip girl
+   17. Love island
+18. What job would you be terrible at?
+   1. Chef
+   2. Teaching
+   3. Singer
+   4. Retail
+   5. Writer
+   6. Doctor
+   7. Politician 
+   8. Policeman
+19. What age would you like to live till?
+   1. 60
+   2. 80
+   3. 90
+   4. 30
+   5. 27
+   6. 42
+   7. 20
+   8. 100
+20. What are you most likely to become famous for?
+   1. Becoming  a meme
+   2. Very mad
+   3. Tik Tok Accountant 
+   4. Music
+   5. Entrepreneurial 
+   6. Comedian
+   7. Tik Tok
+   8. Great scientific revelation
+21. What fictional place would you most like to go to?
+   1. Avatar planet
+   2. Hogwarts
+   3. Rivendale 
+   4. Kings landing 
+   5. Hell/ Heaven 
+   6. Narnia
+   7. Hunger games
+22. What popular tv show do you refuse to watch?
+   1. Love island
+   2. Euphoria
+   3. Friends
+   4. Squid game
+   5. GOT
+   6. South Park 
+   7. Family guy
+   8. The office 
+   9. Big bang theory
+23. What pet would you like to have?
+   1. Highland Cow
+   2. Crow
+   3. Dog
+   4. Cat
+   5. Fish 
+   6. Dolphin
+   7. Panther 
+   8. Don’t want pets
+24. What is the most necessary item of clothing?
+   1. Cargo pants
+   2. Korean shirt
+   3. Jeans
+   4. Shirt 
+   5. Joggers
+   6. Hoodie
+   7. Underwear 
+25. What question would you most like to know the answer to?
+   1. How long till humans destroy themselves?
+   2. How can we solve poverty?
+   3. What happens after death?
+   4. Is there a god and if so what is it?
+   5. Who is the love of my life?
+   6. How can I become rich?
+   7. Is life a figment of our imagination?
+   8. Who is my parents' favorite child?
+   9. Will I be happy?

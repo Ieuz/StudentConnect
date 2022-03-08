@@ -1,6 +1,4 @@
-from tkinter import CASCADE
 from django.db import models
-from django.forms import CharField
 
 # Create your models here.
 class Student(models.Model):
@@ -11,9 +9,10 @@ class Student(models.Model):
     surname = models.CharField(max_length=50)
     date_of_birth = models.DateField()
     city = models.CharField(max_length=30)
-    picture = models.ImageField(null=True)
     security_question = models.CharField(max_length=150)
     security_answer = models.CharField(max_length=50)
+
+    picture = models.ImageField(null=True)    
     matches = models.ManyToManyField('self', related_name='match_list')
     blocks = models.ManyToManyField('self', related_name='block_list')
 
