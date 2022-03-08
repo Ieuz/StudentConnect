@@ -59,7 +59,7 @@
    10. Chess
    11. Board games/card games
    12. Listening to music
-   13. Sudokus
+   13. Sudoku
 6. What do you study?
    1. Philosophy 
    2. Math
@@ -175,9 +175,9 @@
 17. What is your favorite tv show
    1. Rome
    2. Avatar the last air bender
-   3. Anne with an e
+   3. Anne with an E
    4. Sense8
-   5. GOT
+   5. Game of Thrones
    6. Friends
    7. Bigmouth
    8. The office
@@ -243,7 +243,7 @@
    5. Fish 
    6. Dolphin
    7. Panther 
-   8. Don’t want pets
+   8. Don't want pets
 24. What is the most necessary item of clothing?
    1. Cargo pants
    2. Korean shirt
