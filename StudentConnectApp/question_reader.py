@@ -1,5 +1,3 @@
-import os 
-
 def read_questions():
     questions = []
     i = -1
@@ -10,8 +8,10 @@ def read_questions():
             if line[0] != " ":
                 #print(" ".join((line.split(" ")[0:])), [])
                 i += 1
-                questions.append((" ".join((line.split(" ")[0:])).strip(), []))
+                questions.append((" ".join((line.split(" ")[1:])).strip(), []))
             else:
-                questions[i][1].append(" ".join((line.split(" ")[0:])).strip())
+                questions[i][1].append(" ".join((line.split(" ")[4:])).strip())
 
     return (questions)        
+
+read_questions()
