@@ -16,12 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 # imports from app forlder
-from StudentConnectApp import views, ActivateAccount
+from StudentConnectApp import views 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # for login/out - Euan
     path('register/', views.register, name='register'),
     path('logout/', views.user_logout, name='logout'),
-    path('activate/<uidb64>/<token>/', ActivateAccount.as_view(), name='activate'),
+    path('activate/<uidb64>/<token>/', views.ActivateAccount.as_view(), name='activate'),
 ]

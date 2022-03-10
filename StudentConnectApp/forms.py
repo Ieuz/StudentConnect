@@ -1,6 +1,8 @@
 from django import forms
+from django.contrib.auth.models import User
+from StudentConnectApp.models import Student
 
-class UserForm(forms.ModelForm):
+class UserForm  (forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
 
     class Meta:
@@ -9,7 +11,7 @@ class UserForm(forms.ModelForm):
 
 
 class UserProfileForm(forms.ModelForm):
-
     class Meta:
-        model = UserProfile
-        fields = ('website', 'picture',)
+        model = Student
+        fields = ('forename', 'surname','date_of_birth', 'city','security_question',
+        'security_answer', 'picture', 'matches', 'blocks')
