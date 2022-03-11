@@ -1,0 +1,18 @@
+
+
+Use this site key in the HTML code your site serves to users.
+
+SITE KEY: 6LerFMweAAAAAC2ynOAK0pCiv6T8t9pxF3Zkv0ns
+
+
+
+
+
+Use this secret key for communication between your site and reCAPTCHA.
+
+SECRET KEY: 6LerFMweAAAAAICiNJTaABnXHtBGj9jE8tvAvU51
+
+
+Use this key in your application by passing it with the key=API_KEY parameter.
+
+API KEY: AIzaSyDVzcaXLJ6RxTKjOFFn9gAZ0pLf8CInyAQ
