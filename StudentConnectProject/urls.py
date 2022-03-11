@@ -14,14 +14,20 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-# imports from app forlder
-from StudentConnectApp import views 
+from django.urls import path, include
+from StudentConnectApp import views
+from django.conf import settings
+from django.conf.urls.static import static
+
+app_name = 'StudentConnectApp'
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('StudentConnect/', include('StudentConnectApp.urls')),
+    path('', views.index, name='index')
     # for login/out - Euan
-    path('register/', views.register, name='register'),
-    path('logout/', views.user_logout, name='logout'),
-    path('activate/<uidb64>/<token>/', views.ActivateAccount.as_view(), name='activate'),
-]
+    # path('register/', views.register, name='register'),
+    # path('logout/', views.user_logout, name='logout'),
+    # path('activate/<uidb64>/<token>/', views.ActivateAccount.as_view(), name='activate'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
