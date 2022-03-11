@@ -15,11 +15,11 @@
     <body>
         <div class="topnav">
             <img src="logo.png" alt="Logo">
-            <a class="active" href="#home">Home</a>
+            <a class="active" href="{% url 'StudentConnect:Home' %}">Home</a>
 
-            <a href="">My Account</a>
-            <a href="">My Matches</a>
-            <a class="login" href="">Login</a>
+            <a href="{% url 'StudentConnect:myAccount' %}">My Account</a>
+            <a href="{% url 'StudentConnect:myMatches' %}">My Matches</a>
+            <a class="login" href="{% url 'StudentConnect:Login' %}">Login</a>
         </div>
 
         <div>

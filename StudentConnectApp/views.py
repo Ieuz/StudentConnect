@@ -16,12 +16,29 @@ from django.template.loader import render_to_string
 from StudentConnectApp.tokens import account_activation_token
 from django.contrib.auth.decorators import login_required
 
-
-# Create your views here.
-
 def index(request):
     context_dict = {}
     return render(request, 'StudentConnect/index.html', context=context_dict)
+
+# view function for MyAccount page
+def MyAccount(request):
+    context_dict = {}
+    return render(request, 'StudentConnect/myAccount.html', context=context_dict)
+
+# view function for Home page
+def Home(request):
+    context_dict = {}
+    return render(request, 'StudentConnect/home.html', context=context_dict)
+
+# view function for My Matches page
+def MyMatches(request):
+    context_dict = {}
+    return render(request, 'StudentConnect/myMatches.html', context=context_dict)
+
+# view function for My Matches page
+def Login(request):
+    context_dict = {}
+    return render(request, 'StudentConnect/login.html', context=context_dict)
 
 
 class ActivateAccount(View):
@@ -142,3 +159,4 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect(reverse('StudentConnect:index'))
+

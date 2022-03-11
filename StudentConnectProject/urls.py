@@ -25,7 +25,8 @@ app_name = 'StudentConnectApp'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('StudentConnect/', include('StudentConnectApp.urls')),
-    path('', views.index, name='index')
+    path('', views.index, name='index'),
+    # path(),
     # for login/out - Euan
     # path('register/', views.register, name='register'),
     # path('logout/', views.user_logout, name='logout'),
