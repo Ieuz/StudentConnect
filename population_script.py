@@ -1,4 +1,3 @@
-from cgitb import text
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'StudentConnectProject.settings')
 
@@ -6,7 +5,7 @@ import django
 django.setup()
 from StudentConnectApp.models import Student, Question, Choice, Answer
 from StudentConnectApp.question_reader import read_questions
-from factories import StudentFactory
+from StudentConnectApp.factories import StudentFactory
 
 def populate():
 
@@ -31,12 +30,11 @@ def add_choice(question, text):
     return c
 
 def create_students():
+    Student.objects.all().delete()
     students = []
     for i in range(0, 50):
         student = StudentFactory()
-        print("new student created")
         students.append(student)
-        #Student.objects.get_or_create(student)
 
 
 if __name__ == '__main__':
