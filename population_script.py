@@ -6,6 +6,7 @@ django.setup()
 from StudentConnectApp.models import Student, Question, Choice, Answer
 from StudentConnectApp.question_reader import read_questions
 from StudentConnectApp.factories import StudentFactory
+import random
 
 def populate():
 
@@ -35,6 +36,20 @@ def create_students():
     for i in range(0, 50):
         student = StudentFactory()
         students.append(student)
+        create_answers(student)
+
+def create_answers(student):
+    for question in Question.objects.all():
+        available_choices = Choice.objects.filter(question=question)
+        random_id = random.randint(0, available_choices.count()-1)
+        provided_answer = available_choices[random_id]
+        add_answer(student, provided_answer)
+
+def add_answer(student, choice):
+    a = Answer.objects.get_or_create(student=student, choice=choice)[0]
+    a.save()
+    return a
+
 
 
 if __name__ == '__main__':
