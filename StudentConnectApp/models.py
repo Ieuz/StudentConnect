@@ -1,10 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Student(models.Model):
-    username = models.CharField(max_length=25, unique=True)
-    email = models.CharField(max_length=320, unique=True)
-    password = models.CharField(max_length=30) #Change this, email and username as needed when Euan can help
+    user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
+    
     forename = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
     date_of_birth = models.DateField()
@@ -21,7 +21,7 @@ class Student(models.Model):
 
 class Question(models.Model):
     # question_id is autoimplemented by Django
-    text = models.CharField(max_length=250)
+    text = models.CharField(max_length=250, unique=True)
 
     def __str__(self):
         return self.text

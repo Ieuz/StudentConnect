@@ -1,4 +1,3 @@
-from cgitb import text
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'StudentConnectProject.settings')
 
@@ -6,10 +5,10 @@ import django
 django.setup()
 from StudentConnectApp.models import Student, Question, Choice, Answer
 from StudentConnectApp.question_reader import read_questions
+from StudentConnectApp.factories import StudentFactory
 
 def populate():
 
-    students = {}
     answers = {}
     questions = read_questions()
 
@@ -17,6 +16,8 @@ def populate():
         q = add_question(question[0])
         for choice in question[1]:
             add_choice(q, choice)
+    
+    create_students()
 
 def add_question(question):
     q = Question.objects.get_or_create(text=question)[0]
@@ -28,6 +29,14 @@ def add_choice(question, text):
     c.save()
     return c
 
+def create_students():
+    Student.objects.all().delete()
+    students = []
+    for i in range(0, 50):
+        student = StudentFactory()
+        students.append(student)
+
+
 if __name__ == '__main__':
-    print("Starting popultion of database model")
+    print("Starting popultion of database models")
     populate()
