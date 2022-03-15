@@ -3,6 +3,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'StudentConnectProject.settings'
 
 import django
 django.setup()
+from django.contrib.auth.models import User
 from StudentConnectApp.models import Student, Question, Choice, Answer
 from StudentConnectApp.question_reader import read_questions
 from StudentConnectApp.factories import StudentFactory
@@ -10,14 +11,20 @@ import random
 
 def populate():
 
-    answers = {}
-    questions = read_questions()
+    Student.objects.all().delete()
+    Question.objects.all().delete()
+    Choice.objects.all().delete()
+    Answer.objects.all().delete()
+    User.objects.all().delete()
 
+    questions = read_questions()
+    print("Generating questions, and providing choices for them...")
     for question in questions:
         q = add_question(question[0])
         for choice in question[1]:
             add_choice(q, choice)
     
+    print("Generating student users, and their answers to the entrance survey...")
     create_students()
 
 def add_question(question):
@@ -49,8 +56,6 @@ def add_answer(student, choice):
     a = Answer.objects.get_or_create(student=student, choice=choice)[0]
     a.save()
     return a
-
-
 
 if __name__ == '__main__':
     print("Starting popultion of database models")
