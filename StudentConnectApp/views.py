@@ -4,6 +4,8 @@ from django.http import HttpResponse
 from django.urls import reverse
 from StudentConnectApp.forms import StudentForm, StudentProfileForm
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+
 
 def index(request):
     context_dict = {}
@@ -92,11 +94,11 @@ def user_login(request):
         return render(request, 'StudentConnect/login.html')
 
 
-#@login_required
+@login_required
 def user_logout(request):
     logout(request)
     return redirect(reverse('StudentConnect:index'))
 
-#@login_required
+@login_required
 def restricted(request):
-    return render(request, 'rango/restricted.html') 
+    return render(request, 'StudentConnect/restricted.html') 

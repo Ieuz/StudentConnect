@@ -16,10 +16,13 @@
         <div class="topnav">
             <img src="logo.png" alt="Logo">
             <a class="active" href="{% url 'StudentConnect:Home' %}">Home</a>
-
+            {% if user.is_authenticated %}
             <a href="{% url 'StudentConnect:myAccount' %}">My Account</a>
             <a href="{% url 'StudentConnect:myMatches' %}">My Matches</a>
+            <a class ="login" href="{% url 'StudentConnect:logout' %}">Logout</a>
+            {% else %}
             <a class="login" href="{% url 'StudentConnect:login' %}">Login</a>
+            {% endif %}
         </div>
 
         <div>
