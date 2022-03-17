@@ -7,4 +7,12 @@
 
 {% block body_block %}
     <p> This will be the login page. </p>
+    <form id="login_form" method="post" action="{% url 'StudentConnect:login' %}">
+        {% csrf_token %}
+        Username: <input type="text" name="username" value="" size="50" />
+        <br />
+        Password: <input type="password" name="password" value="" size="50" />
+        <br />
+        <input type="submit" value="submit" />
+    </form>
 {% endblock %}

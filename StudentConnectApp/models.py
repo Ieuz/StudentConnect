@@ -16,6 +16,8 @@ class Student(models.Model):
     matches = models.ManyToManyField('self', related_name='match_list')
     blocks = models.ManyToManyField('self', related_name='block_list')
 
+    instagram_username = models.CharField(max_length=30, null=True)
+
     def __str__(self):
         return f"{self.forename} {self.surname}"
 

@@ -2,19 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from django.urls import reverse
-from StudentConnectApp.forms import UserForm, UserProfileForm
-
-# shit tone of imports to help with the email verification
-from django.urls import reverse_lazy
-from django.views.generic import View, UpdateView
+from StudentConnectApp.forms import StudentForm, StudentProfileForm
 from django.contrib.auth.models import User
-from django.contrib import messages
-from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_bytes, force_text
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.template.loader import render_to_string
-from StudentConnectApp.tokens import account_activation_token
 from django.contrib.auth.decorators import login_required
+
 
 def index(request):
     context_dict = {}
@@ -40,6 +31,8 @@ def Login(request):
     context_dict = {}
     return render(request, 'StudentConnect/login.html', context=context_dict)
 
+<<<<<<< HEAD
+=======
 def Help(request):
     context_dict = {}
     return render(request, 'StudentConnect/help.html', context=context_dict)
@@ -73,14 +66,15 @@ class ActivateAccount(View):
             messages.warning(request, ('The confirmation link was invalid, possibly because it has already been used.'))
             return redirect('home')
 
+>>>>>>> main
 # register method taken from Tango with Django Chapter 9 - Euan
 
 def register(request):
     registered = False
 
     if request.method == 'POST':
-        user_form = UserForm(request.POST)
-        profile_form = UserProfileForm(request.POST)
+        user_form = StudentForm(request.POST)
+        profile_form = StudentProfileForm(request.POST)
 
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
@@ -101,8 +95,8 @@ def register(request):
             print(user_form.errors, profile_form.errors)
     
     else:
-        user_form = UserForm()
-        profile_form = UserProfileForm()
+        user_form = StudentForm()
+        profile_form = StudentProfileForm()
 
     # Render the template depending on the context.
     return render(request,'StudentConnect/register.html',
@@ -115,37 +109,6 @@ def register(request):
     # this is commented out, i have no idea why this is here?
     # form_class = UserForm
     # template_name = ''
-
-
-class SignUpForm(UserForm):
-    def get(self, request, *args, **kwargs):
-        form = self.form_class()
-        return render(request, self.template_name, {'form': form})
-
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            user = form.save(commit = False)
-            user.is_active = False # Deactivate account until confirmed
-            user.save()
-
-            current_site = get_current_site(request)
-            subject = 'Activate your account'
-            message = render_to_string('emails/account_activateion_email.html',{
-                'user': user,
-                'domain': current_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': account_activation_token.make_token(user),
-            })
-            user.email_user(subject, message)
-
-            messages.success(request, ('Please Confirm your email to complete reistration'))
-
-            return redirect('login')
-
-        return render(request, self.template_name, {'form': form})
-
-
 
 def user_login(request):
     if request.method == 'POST':
@@ -172,3 +135,6 @@ def user_logout(request):
     logout(request)
     return redirect(reverse('StudentConnect:index'))
 
+@login_required
+def restricted(request):
+    return render(request, 'StudentConnect/restricted.html') 
