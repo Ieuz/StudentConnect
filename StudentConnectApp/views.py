@@ -31,6 +31,19 @@ def Login(request):
     context_dict = {}
     return render(request, 'StudentConnect/login.html', context=context_dict)
 
+
+def Help(request):
+    context_dict = {}
+    return render(request, 'StudentConnect/help.html', context=context_dict)
+
+def Signup(request):
+    context_dict = {}
+    return render(request, 'StudentConnect/signup.html', context=context_dict)
+
+def Profile(request):
+    context_dict = {}
+    return render(request, 'StudentConnect/profile.html', context=context_dict)
+
 # register method taken from Tango with Django Chapter 9 - Euan
 
 def register(request):
