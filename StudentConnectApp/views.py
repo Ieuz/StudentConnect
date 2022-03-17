@@ -48,6 +48,10 @@ def Signup(request):
     context_dict = {}
     return render(request, 'StudentConnect/signup.html', context=context_dict)
 
+def Profile(request):
+    context_dict = {}
+    return render(request, 'StudentConnect/profile.html', context=context_dict)
+
 
 class ActivateAccount(View):
 

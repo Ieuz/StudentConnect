@@ -11,5 +11,6 @@ urlpatterns=[
     path('Login/', views.Login, name='Login'),
     path('Help/', views.Help, name='Help'),
     path('Signup/', views.Signup, name='Signup'),
+    path('Profile/', views.Profile, name='Profile'),
     #add more urls here please
 ]
