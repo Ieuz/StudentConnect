@@ -4,6 +4,7 @@
 <html>
     <head>
         <meta charset="UTF-8"/>
+        <meta name="viewport" content="">
         <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
         <title>
             StudentConnect -
@@ -16,10 +17,13 @@
         <div class="topnav">
             <img src="logo.png" alt="Logo">
             <a class="active" href="{% url 'StudentConnect:Home' %}">Home</a>
-
+            {% if user.is_authenticated %}
             <a href="{% url 'StudentConnect:myAccount' %}">My Account</a>
             <a href="{% url 'StudentConnect:myMatches' %}">My Matches</a>
-            <a class="login" href="{% url 'StudentConnect:Login' %}">Login</a>
+            <a class ="login" href="{% url 'StudentConnect:logout' %}">Logout</a>
+            {% else %}
+            <a class="login" href="{% url 'StudentConnect:login' %}">Login</a>
+            {% endif %}
         </div>
 
         <div>
@@ -40,5 +44,18 @@
             <a href="{% url 'StudentConnect:Help' %}" >Help?</a>
         </div>
 
+
     </body>
 </html>
+
+
+<!--//TRYING-->
+<!--<ion-icon name="logo-instagram"></ion-icon>-->
+<!--<ion-icon name="logo-instagram"></ion-icon>-->
+<!--<ion-icon name="logo-twitter"></ion-icon>-->
+<!--<ion-icon name="logo-discord"></ion-icon>-->
+
+
+<!--//SHOULD BE WITHIN BODY-->
+<!--<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>-->
+<!--<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>-->
