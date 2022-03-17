@@ -28,7 +28,6 @@ urlpatterns = [
     path('', views.index, name='index'),
     # path(),
     # for login/out - Euan
-    # path('register/', views.register, name='register'),
-    # path('logout/', views.user_logout, name='logout'),
-    # path('activate/<uidb64>/<token>/', views.ActivateAccount.as_view(), name='activate'),
+    path('register/', views.register, name='register'),
+    path('logout/', views.user_logout, name='logout'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
