@@ -1,0 +1,20 @@
+{% extends 'StudentConnect/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Help
+{% endblock %}
+
+{% block body_block %}
+<h1>Help &amp; FAQ</h1>
+<h4><span style="color: #008080;">What is StudentConnect?</span></h4>
+<p>StudentConnect is a plarform to help students in Glasgow connect with eachother!</p>
+<h4><span style="color: #008080;">How do I sign up?</span></h4>
+<p>You can <a href="{% url 'StudentConnect:Signup' %}" target="_blank">sign up here</a>.
+    You will be prompted to answer a few simple questions, and we will match you with other students!</p>
+<h4><span style="color: #008080;">I forgot my password! What should I do?</span></h4>
+<p>You can request a password reset on our <a href="{% url 'StudentConnect:Login' %}">login</a> page.</p>
+<p><strong><span style="color: #008080;">How do I connect my social media to my account?</span></strong></p>
+<p>In your <a href="{% url 'StudentConnect:Profile' %}">profile</a> page,
+    click the 'Connect Social Media' button. You will be prompted to enter your information there!</p>
+{% endblock %}
