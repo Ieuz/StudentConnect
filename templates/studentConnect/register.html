@@ -1,0 +1,27 @@
+{% extends 'StudentConnect/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Register
+{% endblock %}
+
+{% block body_block %}
+<h1>Register for StudentConnect</h1>
+{% if registered %}
+<strong>thank you for registering!</strong>
+{% else %}
+<strong>register here!</strong><br />
+<form id="student_form" method="post" action="{% url 'StudentConnect:register' %}"
+      enctype="multipart/form-data">
+
+    {% csrf_token %}
+
+    <!-- Display each form -->
+    {{ user_form.as_p }}
+    {{ profile_form.as_p }}
+
+    <!-- Provide a button to click to submit the form. -->
+    <input type="submit" name="submit" value="Register" />
+</form>
+{% endif %}
+{% endblock %} 
