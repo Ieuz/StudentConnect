@@ -10,5 +10,6 @@ urlpatterns=[
     path('myMatches/', views.MyMatches, name="myMatches"),
     path('Login/', views.Login, name='Login'),
     path('Help/', views.Help, name='Help'),
+    path('Signup/', views.Signup, name='Signup'),
     #add more urls here please
 ]

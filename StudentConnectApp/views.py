@@ -44,6 +44,10 @@ def Help(request):
     context_dict = {}
     return render(request, 'StudentConnect/help.html', context=context_dict)
 
+def Signup(request):
+    context_dict = {}
+    return render(request, 'StudentConnect/signup.html', context=context_dict)
+
 
 class ActivateAccount(View):
 
