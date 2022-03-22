@@ -152,3 +152,7 @@ def user_logout(request):
 @login_required
 def restricted(request):
     return render(request, 'StudentConnect/restricted.html')
+
+def findMatches(request):
+
+    return render(request, 'StudentConnect/findMatches.html')
