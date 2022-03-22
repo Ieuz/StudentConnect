@@ -23,7 +23,7 @@
     <button type="button" class="btn btn-info btn-lg"><a class="text-white" href="{% url 'StudentConnect:register' %}">Register</a></button>
     <button type="button" class="btn btn-info btn-lg"><a class="text-white" href="{% url 'StudentConnect:Login' %}">Login</a></button>
 	{% else %}
-	<button type="button" class="btn btn-info btn-lg"><a class="text-white" href="{% url 'StudentConnect:register' %}">Find my Matches!</a></button>
+	<button type="button" class="btn btn-info btn-lg"><a class="text-white" href="{% url 'StudentConnect:findMatches' %}">Find my Matches!</a></button>
     {% endif %}
 	</div>
 {% endblock %}

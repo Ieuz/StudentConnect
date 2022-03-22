@@ -2,9 +2,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from django.urls import reverse
-from StudentConnectApp.forms import StudentForm, StudentProfileForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from StudentConnectApp.forms import StudentForm, StudentProfileForm, SurveyForm
+from StudentConnectApp.models import Choice, Question
+
 
 
 def index(request):
@@ -44,6 +46,19 @@ def Profile(request):
     context_dict = {}
     return render(request, 'StudentConnect/profile.html', context=context_dict)
 
+def findMatches(request):
+    questions = Question.objects.all()
+    questions_and_choices = {}
+    for question in questions:
+        questions_and_choices[question] = Choice.objects.filter(question = question)
+    if request.method == 'POST':
+        findMatches_form = SurveyForm(request.POST)
+    else:
+        findMatches_form = SurveyForm()
+    return render(request, 'StudentConnect/findMatches.html',
+    context = {'findMatches_form': findMatches_form,
+               'questions_and_choices':questions_and_choices})
+
 # register method taken from Tango with Django Chapter 9 - Euan
 
 def register(request):
@@ -82,10 +97,6 @@ def register(request):
                              'registered': registered})
 
 
-
-    # this is commented out, i have no idea why this is here?
-    # form_class = UserForm
-    # template_name = ''
 
 def user_login(request):
     if request.method == 'POST':
