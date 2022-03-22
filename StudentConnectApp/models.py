@@ -13,10 +13,12 @@ class Student(models.Model):
     security_answer = models.CharField(max_length=50)
 
     picture = models.ImageField(null=True, blank=True)    
-    matches = models.ManyToManyField('self', related_name='match_list')
-    blocks = models.ManyToManyField('self', related_name='block_list')
+    matches = models.ManyToManyField('self', related_name='match_list', blank=True, null=True)
+    blocks = models.ManyToManyField('self', related_name='block_list', blank=True, null=True)
 
-    instagram_username = models.CharField(max_length=30, null=True)
+    completed_survey = models.BooleanField(default=False)
+
+    instagram_username = models.CharField(max_length=30, null=True, blank=True)
 
     def __str__(self):
         return f"{self.forename} {self.surname}"

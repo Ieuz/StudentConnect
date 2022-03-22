@@ -47,13 +47,17 @@ def Profile(request):
     return render(request, 'StudentConnect/profile.html', context=context_dict)
 
 def findMatches(request):
+    user = request.user
+    student = Student.objects.get(user=user)
+    if student.completed_survey == True:
+        print("lol")
+        return redirect(reverse('StudentConnect:myMatches'))
+    
     questions = Question.objects.all()
     questions_and_choices = {}
     for question in questions:
         questions_and_choices[question] = Choice.objects.filter(question = question)
     if request.method == 'POST':
-        user = request.user
-        student = Student.objects.get(user=user)
         first_question = True
         for choice_id in request.POST.values():
             if first_question == True:
@@ -62,6 +66,9 @@ def findMatches(request):
                 a = Answer.objects.get_or_create(student=student, choice=Choice.objects.get(id=choice_id))[0]
                 a.save()
         print(request.POST)
+
+    student.completed_survey = True
+    student.save()
     return render(request, 'StudentConnect/findMatches.html',
     context = {'questions_and_choices':questions_and_choices})
 
