@@ -11,7 +11,7 @@ from StudentConnectApp.models import Choice, Question, Answer, Student
 
 def index(request):
     context_dict = {}
-    return render(request, 'StudentConnect/index.html', context=context_dict)
+    return render(request, 'StudentConnect/home.html', context=context_dict)
 
 # view function for MyAccount page
 def MyAccount(request):
@@ -69,6 +69,7 @@ def findMatches(request):
 
     student.completed_survey = True
     student.save()
+
     return render(request, 'StudentConnect/findMatches.html',
     context = {'questions_and_choices':questions_and_choices})
 
