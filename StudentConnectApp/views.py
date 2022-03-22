@@ -6,6 +6,7 @@ from StudentConnectApp.forms import StudentForm, StudentProfileForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from StudentConnectApp.models import Student
+from .forms import StudentProfileEditForm
 
 
 def index(request):
@@ -13,6 +14,7 @@ def index(request):
     return render(request, 'StudentConnect/index.html', context=context_dict)
 
 # view function for MyAccount page
+@login_required
 def MyAccount(request):
     loggedInUser=request.user.username
 
@@ -30,6 +32,7 @@ def Home(request):
     return render(request, 'StudentConnect/home.html', context=context_dict)
 
 # view function for My Matches page
+@login_required
 def MyMatches(request):
     context_dict = {}
     return render(request, 'StudentConnect/myMatches.html', context=context_dict)
@@ -51,6 +54,24 @@ def Signup(request):
 def Profile(request):
     context_dict = {}
     return render(request, 'StudentConnect/profile.html', context=context_dict)
+
+@login_required
+def editMyAccount(request):
+    loggedInUser=request.user.username
+
+    exampleUser = User.objects.get(username=loggedInUser)
+    userList= Student.objects.get(user = exampleUser)
+    
+    form = StudentProfileEditForm(request.POST or None, instance=userList)
+    if form.is_valid():
+        form.save()
+        return redirect(reverse('StudentConnect:myAccount'))
+
+    context_dict = {}
+    context_dict['userInfo']=userList
+    context_dict['form']=form
+    return render(request, 'StudentConnect/editMyAccount.html', context=context_dict)
+
 
 # register method taken from Tango with Django Chapter 9 - Euan
 

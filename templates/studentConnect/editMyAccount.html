@@ -1,0 +1,17 @@
+{% extends 'StudentConnect/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Edit My Account
+{% endblock %}
+
+{% block body_block %}
+    <h1>Upadte account details...</h1>
+    <form action="" method=POST>
+        {% csrf_token %}
+        {{ form.as_p}}
+        <br/>
+        <input type="submit" value="Update" class="btn btn-info btn-lg text-white">
+    </form>
+    
+{% endblock %}
