@@ -18,4 +18,5 @@ urlpatterns=[
     path('restricted/', views.restricted, name='restricted'),
     path('logout/', views.user_logout, name='logout'),
     path('editMyAccount/', views.editMyAccount, name="editMyAccount"),
+    path('findMatches/', views.findMatches, name="findMatches"),
 ]

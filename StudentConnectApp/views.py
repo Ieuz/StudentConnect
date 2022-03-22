@@ -13,29 +13,32 @@ def index(request):
     context_dict = {}
     return render(request, 'StudentConnect/index.html', context=context_dict)
 
+
 # view function for MyAccount page
 @login_required
 def MyAccount(request):
-    loggedInUser=request.user.username
+    loggedInUser = request.user.username
 
     exampleUser = User.objects.get(username=loggedInUser)
-    userList= Student.objects.get(user = exampleUser)
-   
+    userList = Student.objects.get(user=exampleUser)
 
     context_dict = {}
-    context_dict['userInfo']=userList
+    context_dict['userInfo'] = userList
     return render(request, 'StudentConnect/myAccount.html', context=context_dict)
+
 
 # view function for Home page
 def Home(request):
     context_dict = {}
     return render(request, 'StudentConnect/home.html', context=context_dict)
 
+
 # view function for My Matches page
 @login_required
 def MyMatches(request):
     context_dict = {}
     return render(request, 'StudentConnect/myMatches.html', context=context_dict)
+
 
 # view function for My Matches page
 def Login(request):
@@ -47,21 +50,25 @@ def Help(request):
     context_dict = {}
     return render(request, 'StudentConnect/help.html', context=context_dict)
 
+
 def Signup(request):
     context_dict = {}
     return render(request, 'StudentConnect/signup.html', context=context_dict)
+
 
 def Profile(request):
     context_dict = {}
     return render(request, 'StudentConnect/profile.html', context=context_dict)
 
+
+
 @login_required
 def editMyAccount(request):
-    loggedInUser=request.user.username
+    loggedInUser = request.user.username
 
     exampleUser = User.objects.get(username=loggedInUser)
-    userList= Student.objects.get(user = exampleUser)
-    
+    userList = Student.objects.get(user=exampleUser)
+
     form = StudentProfileEditForm(request.POST or None, instance=userList)
     if form.is_valid():
         form.save()
@@ -99,22 +106,21 @@ def register(request):
 
         else:
             print(user_form.errors, profile_form.errors)
-    
+
     else:
         user_form = StudentForm()
         profile_form = StudentProfileForm()
 
     # Render the template depending on the context.
-    return render(request,'StudentConnect/register.html',
-                  context = {'user_form': user_form, 
-                             'profile_form': profile_form,
-                             'registered': registered})
-
-
+    return render(request, 'StudentConnect/register.html',
+                  context={'user_form': user_form,
+                           'profile_form': profile_form,
+                           'registered': registered})
 
     # this is commented out, i have no idea why this is here?
     # form_class = UserForm
     # template_name = ''
+
 
 def user_login(request):
     if request.method == 'POST':
@@ -135,13 +141,19 @@ def user_login(request):
     else:
         return render(request, 'StudentConnect/login.html')
 
+
 # Changed logout to redirect to home rather than index
 @login_required
 def user_logout(request):
     logout(request)
-    #return redirect(reverse('StudentConnect:index'))
+    # return redirect(reverse('StudentConnect:index'))
     return redirect(reverse('StudentConnect:Home'))
+
 
 @login_required
 def restricted(request):
-    return render(request, 'StudentConnect/restricted.html') 
+    return render(request, 'StudentConnect/restricted.html')
+
+def findMatches(request):
+
+    return render(request, 'StudentConnect/findMatches.html')
