@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from StudentConnectApp.forms import StudentForm, StudentProfileForm
+from StudentConnectApp.forms import StudentForm, StudentProfileForm, StudentProfileEditForm
 from StudentConnectApp.models import Choice, Question, Answer, Student
 
 
@@ -14,8 +14,16 @@ def index(request):
 
 
 # view function for MyAccount page
+@login_required
 def MyAccount(request):
+    loggedInUser=request.user.username
+
+    exampleUser = User.objects.get(username=loggedInUser)
+    userList= Student.objects.get(user = exampleUser)
+
+
     context_dict = {}
+    context_dict['userInfo']=userList
     return render(request, 'StudentConnect/myAccount.html', context=context_dict)
 
 
@@ -26,6 +34,7 @@ def Home(request):
 
 
 # view function for My Matches page
+@login_required
 def MyMatches(request):
     context_dict = {}
     return render(request, 'StudentConnect/myMatches.html', context=context_dict)
@@ -51,15 +60,28 @@ def Profile(request):
     context_dict = {}
     return render(request, 'StudentConnect/profile.html', context=context_dict)
 
+@login_required
 def editMyAccount(request):
+    loggedInUser=request.user.username
+
+    exampleUser = User.objects.get(username=loggedInUser)
+    userList= Student.objects.get(user = exampleUser)
+
+    form = StudentProfileEditForm(request.POST or None, instance=userList)
+    if form.is_valid():
+        form.save()
+        return redirect(reverse('StudentConnect:myAccount'))
+
     context_dict = {}
+    context_dict['userInfo']=userList
+    context_dict['form']=form
     return render(request, 'StudentConnect/editMyAccount.html', context=context_dict)
 
 def forgotPassword(request):
     context_dict = {}
     return render(request, 'StudentConnect/forgotPassword.html', context=context_dict)
 
-
+@login_required
 def findMatches(request):
     user = request.user
     student = Student.objects.get(user=user)
