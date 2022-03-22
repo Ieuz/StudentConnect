@@ -1,3 +1,4 @@
+
 {% extends 'StudentConnect/base.html' %}
 {% load staticfiles %}
 
@@ -10,7 +11,6 @@
 
     <div class="float-left">
     <h1 class="">My Account</h1>
-    
         <ul class="lead">
             <li>Forename: {{ userInfo.forename }}</li>
             <li>Surname: {{ userInfo.surname }}</li>
@@ -27,7 +27,7 @@
         <a href="https://instagram.com/{{ userInfo.instagram_username }}" class="float-left" target="_blank">
             <ion-icon name="logo-instagram" size="large"></ion-icon>
         </a>
-        
+
     </div>
 
     <div class="lead float-right">
