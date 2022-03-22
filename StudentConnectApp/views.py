@@ -2,28 +2,20 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from django.urls import reverse
-from StudentConnectApp.forms import StudentForm, StudentProfileForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from StudentConnectApp.models import Student
-from .forms import StudentProfileEditForm
+from StudentConnectApp.forms import StudentForm, StudentProfileForm
+from StudentConnectApp.models import Choice, Question, Answer, Student
 
 
 def index(request):
     context_dict = {}
-    return render(request, 'StudentConnect/index.html', context=context_dict)
+    return render(request, 'StudentConnect/home.html', context=context_dict)
 
 
 # view function for MyAccount page
-@login_required
 def MyAccount(request):
-    loggedInUser = request.user.username
-
-    exampleUser = User.objects.get(username=loggedInUser)
-    userList = Student.objects.get(user=exampleUser)
-
     context_dict = {}
-    context_dict['userInfo'] = userList
     return render(request, 'StudentConnect/myAccount.html', context=context_dict)
 
 
@@ -34,7 +26,6 @@ def Home(request):
 
 
 # view function for My Matches page
-@login_required
 def MyMatches(request):
     context_dict = {}
     return render(request, 'StudentConnect/myMatches.html', context=context_dict)
@@ -60,24 +51,41 @@ def Profile(request):
     context_dict = {}
     return render(request, 'StudentConnect/profile.html', context=context_dict)
 
-
-
-@login_required
 def editMyAccount(request):
-    loggedInUser = request.user.username
-
-    exampleUser = User.objects.get(username=loggedInUser)
-    userList = Student.objects.get(user=exampleUser)
-
-    form = StudentProfileEditForm(request.POST or None, instance=userList)
-    if form.is_valid():
-        form.save()
-        return redirect(reverse('StudentConnect:myAccount'))
-
     context_dict = {}
-    context_dict['userInfo']=userList
-    context_dict['form']=form
     return render(request, 'StudentConnect/editMyAccount.html', context=context_dict)
+
+def forgotPassword(request):
+    context_dict = {}
+    return render(request, 'StudentConnect/forgotPassword.html', context=context_dict)
+
+
+def findMatches(request):
+    user = request.user
+    student = Student.objects.get(user=user)
+    if student.completed_survey == True:
+        print("lol")
+        return redirect(reverse('StudentConnect:myMatches'))
+
+    questions = Question.objects.all()
+    questions_and_choices = {}
+    for question in questions:
+        questions_and_choices[question] = Choice.objects.filter(question=question)
+    if request.method == 'POST':
+        first_question = True
+        for choice_id in request.POST.values():
+            if first_question == True:
+                first_question = False
+            else:
+                a = Answer.objects.get_or_create(student=student, choice=Choice.objects.get(id=choice_id))[0]
+                a.save()
+        print(request.POST)
+
+    student.completed_survey = True
+    student.save()
+
+    return render(request, 'StudentConnect/findMatches.html',
+                  context={'questions_and_choices': questions_and_choices})
 
 
 # register method taken from Tango with Django Chapter 9 - Euan
@@ -117,10 +125,6 @@ def register(request):
                            'profile_form': profile_form,
                            'registered': registered})
 
-    # this is commented out, i have no idea why this is here?
-    # form_class = UserForm
-    # template_name = ''
-
 
 def user_login(request):
     if request.method == 'POST':
@@ -153,7 +157,3 @@ def user_logout(request):
 @login_required
 def restricted(request):
     return render(request, 'StudentConnect/restricted.html')
-
-def findMatches(request):
-
-    return render(request, 'StudentConnect/findMatches.html')
