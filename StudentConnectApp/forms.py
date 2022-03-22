@@ -14,4 +14,4 @@ class StudentProfileForm(forms.ModelForm):
     class Meta:
         model = Student
         fields = ('forename', 'surname','date_of_birth', 'city','security_question',
-        'security_answer', 'picture', 'matches', 'blocks')
+        'security_answer', 'picture')

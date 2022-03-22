@@ -11,7 +11,7 @@
         <!-- Bootstrap link to css code -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+        
 
         <title>
             StudentConnect -
@@ -21,35 +21,39 @@
         </title>
     </head>
     <body>
-        <div class="topnav">
-            <img src="logo.png" alt="Logo">
-            <button type="button" class="btn btn-info"><a href="{% url 'StudentConnect:Home' %}">Home</a></button>
-            {% if user.is_authenticated %}
-            <a href="{% url 'StudentConnect:myAccount' %}">My Account</a>
-            <a href="{% url 'StudentConnect:myMatches' %}">My Matches</a>
-            <a class ="login" href="{% url 'StudentConnect:logout' %}">Logout</a>
-            {% else %}
-            <a class="login" href="{% url 'StudentConnect:login' %}">Login</a>
-            {% endif %}
-        </div>
+        
+        <!-- Top nav bar -->
+        <nav class="navbar navbar-expand-sm bg-secondary">
+        	<img src="{{ MEDIA_URL}}logo.png" alt="Logo" width=4% height=auto>
+        	
+	            {% if user.is_authenticated %}
+	            <div>
+	            <button type="button" class="btn btn-info navbar-btn"><a class="nav-link text-white" href="{% url 'StudentConnect:Home' %}">Home</a></button>
+	            <button type="button" class="btn btn-info navbar-btn"><a class="nav-link text-white" href="{% url 'StudentConnect:myAccount' %}">My Account</a></button>
+	            <button type="button" class="btn btn-info navbar-btn"><a class="nav-link text-white" href="{% url 'StudentConnect:myMatches' %}">My Matches</a></button>
+	            </div>
+	            <div class="ml-auto">
+	            <span class="navbar-text">Welcome back to Student Connect {{ user.username }}</span>
+	            <button type="button" class="btn btn-info navbar-btn"><a class="nav-link text-white" href="{% url 'StudentConnect:logout' %}">Logout</a></button>
+	            </div>
+	            {% else %}
+	            <button type="button" class="btn btn-info navbar-btn"><a class="nav-link text-white" href="{% url 'StudentConnect:Home' %}">Home</a></button>
+	            <div class="ml-auto">
+	            <button type="button" class="btn btn-info navbar-btn"><a class="nav-link text-white" href="{% url 'StudentConnect:login' %}">Login</a></button>
+            	</div>
+            	{% endif %}
+           </nav>
 
         <div>
             {% block body_block %}
             {% endblock %}
         </div>
 
-<!--        <div style="padding-left:16px">-->
-<!--            <h2>Page example</h2>-->
-<!--            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. -->
-<!--                Integer gravida sodales tempor. Sed imperdiet nunc nunc. Aliquam -->
-<!--                porttitor dapibus nulla. Donec a lacus in nisi mollis pellentesque.-->
-<!--            </p>-->
-<!--        </div>-->
-
-        <div class="botnav">
-            <img src="logo.png" alt="Logo">
-            <a href="{% url 'StudentConnect:Help' %}" >Help?</a>
-        </div>
+        <!--Bottom Navbar -->
+        <nav class="navbar navbar-expand-sm bg-secondary fixed-bottom">
+        	<img src="{{ MEDIA_URL}}logo.png" alt="Logo" width=4% height=auto>
+            <a class="text-white nav-link" href="{% url 'StudentConnect:Help' %}" >Help?</a></button>
+        </nav>
 
         <!-- Bootstrap implementation code -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

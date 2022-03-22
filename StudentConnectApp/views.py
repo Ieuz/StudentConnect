@@ -106,11 +106,12 @@ def user_login(request):
     else:
         return render(request, 'StudentConnect/login.html')
 
-
+# Changed logout to redirect to home rather than index
 @login_required
 def user_logout(request):
     logout(request)
-    return redirect(reverse('StudentConnect:index'))
+    #return redirect(reverse('StudentConnect:index'))
+    return redirect(reverse('StudentConnect:Home'))
 
 @login_required
 def restricted(request):
