@@ -4,8 +4,8 @@ from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from StudentConnectApp.forms import StudentForm, StudentProfileForm, SurveyForm
-from StudentConnectApp.models import Choice, Question
+from StudentConnectApp.forms import StudentForm, StudentProfileForm
+from StudentConnectApp.models import Choice, Question, Answer, Student
 
 
 
@@ -52,12 +52,18 @@ def findMatches(request):
     for question in questions:
         questions_and_choices[question] = Choice.objects.filter(question = question)
     if request.method == 'POST':
-        findMatches_form = SurveyForm(request.POST)
-    else:
-        findMatches_form = SurveyForm()
+        user = request.user
+        student = Student.objects.get(user=user)
+        first_question = True
+        for choice_id in request.POST.values():
+            if first_question == True:
+                first_question = False
+            else:
+                a = Answer.objects.get_or_create(student=student, choice=Choice.objects.get(id=choice_id))[0]
+                a.save()
+        print(request.POST)
     return render(request, 'StudentConnect/findMatches.html',
-    context = {'findMatches_form': findMatches_form,
-               'questions_and_choices':questions_and_choices})
+    context = {'questions_and_choices':questions_and_choices})
 
 # register method taken from Tango with Django Chapter 9 - Euan
 

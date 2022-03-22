@@ -12,7 +12,7 @@ class Student(models.Model):
     security_question = models.CharField(max_length=150)
     security_answer = models.CharField(max_length=50)
 
-    picture = models.ImageField(null=True)    
+    picture = models.ImageField(null=True, blank=True)    
     matches = models.ManyToManyField('self', related_name='match_list')
     blocks = models.ManyToManyField('self', related_name='block_list')
 
