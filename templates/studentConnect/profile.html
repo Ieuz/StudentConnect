@@ -2,9 +2,42 @@
 {% load staticfiles %}
 
 {% block title_block %}
-    Login
+    Profile
 {% endblock %}
 
 {% block body_block %}
     <p> This will be the Profile page. </p>
+
+    <div class="float-left">
+        <h1 class="">My Account</h1>
+        
+            <ul class="lead">
+                <li>Forename: {{ userInfo.forename }}</li>
+                <li>Surname: {{ userInfo.surname }}</li>
+                <li>Date of Birth: {{ userInfo.date_of_birth }}</li>
+                <li>City: {{ userInfo.city }}</li>
+                <p>Matches:</p>
+                <ul>
+                    {% for match in userInfo.matches.all %}
+                    <li>{{ match }}</li>
+                    {% endfor %}
+                </ul>
+                <li>Instagram username: {{ userInfo.instagram_username }}</li>
+            </ul>
+            <a href="https://instagram.com/{{ userInfo.instagram_username }}" class="float-left" target="_blank">
+                <ion-icon name="logo-instagram" size="large"></ion-icon>
+            </a>
+            
+        </div>
+    
+        <div class="lead float-right">
+            <li>Profile Picture: </li>
+            <img src="{{ MEDIA_URL }}{{ userInfo.picture }}" alt="Profile pic" width=30% height=auto>
+        </div>
+    
+    
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    
+
 {% endblock %}
