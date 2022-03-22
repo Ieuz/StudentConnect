@@ -5,6 +5,7 @@ from django.urls import reverse
 from StudentConnectApp.forms import StudentForm, StudentProfileForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from StudentConnectApp.models import Student
 
 
 def index(request):
@@ -13,7 +14,14 @@ def index(request):
 
 # view function for MyAccount page
 def MyAccount(request):
+    loggedInUser=request.user.username
+
+    exampleUser = User.objects.get(username=loggedInUser)
+    userList= Student.objects.get(user = exampleUser)
+   
+
     context_dict = {}
+    context_dict['userInfo']=userList
     return render(request, 'StudentConnect/myAccount.html', context=context_dict)
 
 # view function for Home page
