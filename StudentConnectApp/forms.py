@@ -20,4 +20,8 @@ class StudentProfileForm(forms.ModelForm):
 class StudentProfileEditForm(forms.ModelForm):
     class Meta:
         model = Student
+<<<<<<< HEAD
         fields = ('forename', 'surname','date_of_birth', 'city', 'picture')
+=======
+        fields = ('forename', 'surname','date_of_birth', 'city', 'picture')
+>>>>>>> 690fc50 (My account and edit my accounts with forms done)
