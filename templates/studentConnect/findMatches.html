@@ -1,0 +1,22 @@
+{% extends 'StudentConnect/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Find your Matches!
+{% endblock %}
+
+{% block body_block %}
+    <p> Complete the survey and find your Matches! </p>
+    <form id="survey_form" method="post" action="{% url 'StudentConnect:findMatches' %}">
+        {% csrf_token %}
+        {% for question, choices in questions_and_choices.items %}
+        <label for="{{ question }}">{{ question }}</label>
+            <select id="{{ question }}" name="{{ question }}">
+                {% for choice in choices %}
+                <option value="{{ choice.id }}">{{ choice }}</option>
+                {% endfor %}
+            </select><br>
+        {% endfor %}
+        <input type="submit" value="submit" />
+    </form>
+{% endblock %}
