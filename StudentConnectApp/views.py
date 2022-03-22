@@ -61,6 +61,7 @@ def Profile(request):
     return render(request, 'StudentConnect/profile.html', context=context_dict)
 
 
+
 @login_required
 def editMyAccount(request):
     loggedInUser = request.user.username
@@ -74,8 +75,8 @@ def editMyAccount(request):
         return redirect(reverse('StudentConnect:myAccount'))
 
     context_dict = {}
-    context_dict['userInfo'] = userList
-    context_dict['form'] = form
+    context_dict['userInfo']=userList
+    context_dict['form']=form
     return render(request, 'StudentConnect/editMyAccount.html', context=context_dict)
 
 
