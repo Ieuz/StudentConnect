@@ -12,23 +12,21 @@
             <ul class="lead">
                 <li>Date of Birth: {{ userInfo.date_of_birth }}</li>
                 <li>City: {{ userInfo.city }}</li>
-                <p>Matches:</p>
-                <ul>
-                    {% for match in userInfo.matches.all %}
-                    <li>{{ match }}</li>
-                    {% endfor %}
-                </ul>
-                <li>Instagram username: {{ userInfo.instagram_username }}</li>
             </ul>
+            {% if userInfo.instagram_username %}
             <a href="https://instagram.com/{{ userInfo.instagram_username }}" class="float-left" target="_blank">
                 <ion-icon name="logo-instagram" size="large"></ion-icon>
             </a>
+            {% endif %}
             
         </div>
     
         <div class="lead float-right">
-            <li>Profile Picture: </li>
+            {% if userInfo.picture %}
             <img src="{{ MEDIA_URL }}{{ userInfo.picture }}" alt="Profile pic" width=30% height=auto>
+            {% else %} 
+            <img src="{% static 'images/blankProfile.png' %}" alt="Profile pic" width=30% height=auto>
+            {% endif %}
         </div>
     
     
