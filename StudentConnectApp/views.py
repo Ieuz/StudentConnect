@@ -16,7 +16,14 @@ def index(request):
 # view function for MyAccount page
 @login_required
 def MyAccount(request):
+    loggedInUser=request.user.username
+
+    exampleUser = User.objects.get(username=loggedInUser)
+    userList= Student.objects.get(user = exampleUser)
+
+
     context_dict = {}
+    context_dict['userInfo']=userList
     return render(request, 'StudentConnect/myAccount.html', context=context_dict)
 
 
@@ -59,7 +66,7 @@ def editMyAccount(request):
 
     exampleUser = User.objects.get(username=loggedInUser)
     userList= Student.objects.get(user = exampleUser)
-    
+
     form = StudentProfileEditForm(request.POST or None, instance=userList)
     if form.is_valid():
         form.save()
@@ -74,7 +81,7 @@ def forgotPassword(request):
     context_dict = {}
     return render(request, 'StudentConnect/forgotPassword.html', context=context_dict)
 
-
+@login_required
 def findMatches(request):
     user = request.user
     student = Student.objects.get(user=user)
