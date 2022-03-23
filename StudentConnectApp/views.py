@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from StudentConnectApp.forms import StudentForm, StudentProfileForm, StudentProfileEditForm, ResetPasswordUser, ResetPasswordStudent
+from StudentConnectApp.loadMatches import loadMatches
 from StudentConnectApp.models import Choice, Question, Answer, Student
 
 
@@ -36,6 +37,15 @@ def Home(request):
 # view function for My Matches page
 @login_required
 def MyMatches(request):
+    user = request.user
+    student = Student.objects.get(user=user)
+
+    loadMatches(student)
+
+    """
+
+    if student.matches_ready == False:
+        return render(request, 'StudentConnect/waitPage.html')"""
     context_dict = {}
     return render(request, 'StudentConnect/myMatches.html', context=context_dict)
 
@@ -97,7 +107,6 @@ def findMatches(request):
     student = Student.objects.get(user=user)
 
     if student.completed_survey == True:
-        print("lol")
         return redirect(reverse('StudentConnect:myMatches'))
 
     questions = Question.objects.all()

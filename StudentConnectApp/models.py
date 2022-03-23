@@ -17,6 +17,7 @@ class Student(models.Model):
     blocks = models.ManyToManyField('self', related_name='block_list', blank=True, null=True)
 
     completed_survey = models.BooleanField(default=False)
+    matches_ready = models.BooleanField(default=False)
 
     instagram_username = models.CharField(max_length=30, null=True, blank=True)
 

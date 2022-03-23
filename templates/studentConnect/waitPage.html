@@ -1,0 +1,17 @@
+{% extends 'StudentConnect/base.html' %}
+{% load staticfiles %}
+
+{% block meta_block %}
+<meta http-equiv = "refresh" content = "5; url = {% url 'StudentConnect:myMatches' %}" />
+{% endblock %}
+
+{% block title_block %}
+    Find your Matches!
+{% endblock %}
+
+{% block body_block %}
+    <p>Your matches are being prepared! Please wait...</p>
+    <script>
+        //Load up matches once they are ready.
+    </script>
+{% endblock %}
