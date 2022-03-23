@@ -9,6 +9,12 @@ class StudentForm  (forms.ModelForm):
         model = User
         fields = ('username', 'email', 'password',)
 
+    #try:
+    #    if '@student.' not in .fields[1]:
+    #        raise ValueError("invalid email")
+    #except:
+    #    print("valid email")
+
 
 class StudentProfileForm(forms.ModelForm):
 

@@ -130,6 +130,10 @@ def register(request):
         profile_form = StudentProfileForm(request.POST)
 
         if user_form.is_valid() and profile_form.is_valid():
+            user_email = user_form.cleaned_data['email']
+            if '@student.' not in user_email:
+                raise ValueError('Invalid Email')
+                
             user = user_form.save()
 
             user.set_password(user.password)
