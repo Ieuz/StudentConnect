@@ -17,14 +17,12 @@ def index(request):
 # view function for MyAccount page
 @login_required
 def MyAccount(request):
-    loggedInUser=request.user.username
-
-    exampleUser = User.objects.get(username=loggedInUser)
-    userList= Student.objects.get(user = exampleUser)
+    user = request.user
+    student = Student.objects.get(user=user)
 
 
     context_dict = {}
-    context_dict['userInfo']=userList
+    context_dict['userInfo']=student
     return render(request, 'StudentConnect/myAccount.html', context=context_dict)
 
 
@@ -34,21 +32,38 @@ def Home(request):
     return render(request, 'StudentConnect/home.html', context=context_dict)
 
 
+@login_required
+def loadingMatches(request):
+    user = request.user
+    student = Student.objects.get(user=user)
+
+    loadMatches(student)
+
+    return render(request, 'StudentConnect/myMatches.html')
+
+
+
 # view function for My Matches page
 @login_required
 def MyMatches(request):
     user = request.user
     student = Student.objects.get(user=user)
 
-    loadMatches(student)
-
-    """
-
     if student.matches_ready == False:
-        return render(request, 'StudentConnect/waitPage.html')"""
+        student.matches_ready = True
+        student.save()
+        return render(request, 'StudentConnect/waitPage.html')
     context_dict = {}
-    return render(request, 'StudentConnect/myMatches.html', context=context_dict)
+    context_dict['userInfo']=student
+    return render(request, 'StudentConnect/myMatches.html', context_dict)
 
+@login_required
+def otherProfiles(request, username):
+    user = User.objects.get(username=username)
+    sought_user = Student.objects.get(user=user)
+
+    context_dict = {'userInfo':sought_user}
+    return render(request, 'StudentConnect/profile.html', context=context_dict)
 
 # view function for My Matches page
 def Login(request):
@@ -66,9 +81,6 @@ def Signup(request):
     return render(request, 'StudentConnect/signup.html', context=context_dict)
 
 
-def Profile(request):
-    context_dict = {}
-    return render(request, 'StudentConnect/profile.html', context=context_dict)
 
 @login_required
 def editMyAccount(request):
@@ -106,13 +118,6 @@ def findMatches(request):
     user = request.user
     student = Student.objects.get(user=user)
 
-    if student.completed_survey == True:
-        return redirect(reverse('StudentConnect:myMatches'))
-
-    questions = Question.objects.all()
-    questions_and_choices = {}
-    for question in questions:
-        questions_and_choices[question] = Choice.objects.filter(question=question)
     if request.method == 'POST':
         first_question = True
         for choice_id in request.POST.values():
@@ -123,7 +128,16 @@ def findMatches(request):
                 a.save()
         print(request.POST)
         student.completed_survey = True
-    student.save()
+        student.save()
+
+    if student.completed_survey == True:
+        return redirect(reverse('StudentConnect:myMatches'))
+
+    questions = Question.objects.all()
+    questions_and_choices = {}
+    for question in questions:
+        questions_and_choices[question] = Choice.objects.filter(question=question)
+    
 
     return render(request, 'StudentConnect/findMatches.html',
                   context={'questions_and_choices': questions_and_choices})

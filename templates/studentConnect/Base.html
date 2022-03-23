@@ -23,7 +23,7 @@
             {% endblock %}
         </title>
     </head>
-    <body>
+    <body class="d-flex flex-column min-vh-100">
         
         <!-- Top nav bar -->
         <nav class="navbar navbar-expand-sm bg-secondary">
@@ -53,10 +53,10 @@
         </div>
 
         <!--Bottom Navbar -->
-        <nav class="navbar navbar-expand-sm bg-secondary fixed-bottom">
+        <footer class="navbar navbar-expand-sm bg-secondary fixed-bottom">
         	<img src="{{ MEDIA_URL}}logo.png" alt="Logo" width=4% height=auto>
             <a class="text-white nav-link" href="{% url 'StudentConnect:Help' %}" >Help?</a></button>
-        </nav>
+        </footer>
 
         <!-- Bootstrap implementation code -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

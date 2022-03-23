@@ -6,7 +6,6 @@ def read_questions():
         data = f.readlines()
         for line in data:
             if line[0] != " ":
-                #print(" ".join((line.split(" ")[0:])), [])
                 i += 1
                 questions.append((" ".join((line.split(" ")[1:])).strip(), []))
             else:

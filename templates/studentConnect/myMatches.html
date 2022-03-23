@@ -8,6 +8,12 @@
 {% block body_block %}
 <!--    <meta http-equiv="X-UA-Compatible" content = "IE=edge">-->
     <p> This will be My Matches Page </p>
+    <p>Matches:</p>
+    <ul>
+        {% for match in userInfo.matches.all %}
+        <li><a href="{% url 'StudentConnect:otherProfiles' match.user.username %}">{{ match }}</a></li>
+        {% endfor %}
+    </ul>
     <a href="https://instagram.com/emmagort_" target="_blank">
         <ion-icon name="logo-instagram"></ion-icon>
     </a>

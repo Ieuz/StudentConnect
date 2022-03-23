@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block meta_block %}
-<meta http-equiv = "refresh" content = "5; url = {% url 'StudentConnect:myMatches' %}" />
+<meta http-equiv = "refresh" content = "1; url = {% url 'StudentConnect:loadMatches' %}" />
 {% endblock %}
 
 {% block title_block %}
@@ -11,7 +11,4 @@
 
 {% block body_block %}
     <p>Your matches are being prepared! Please wait...</p>
-    <script>
-        //Load up matches once they are ready.
-    </script>
 {% endblock %}
