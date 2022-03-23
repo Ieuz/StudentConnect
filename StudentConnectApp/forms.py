@@ -21,3 +21,8 @@ class StudentProfileEditForm(forms.ModelForm):
     class Meta:
         model = Student
         fields = ('forename', 'surname','date_of_birth', 'city', 'picture')
+
+class ResetPasswordUser(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('username',)
