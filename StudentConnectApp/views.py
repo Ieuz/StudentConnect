@@ -118,13 +118,6 @@ def findMatches(request):
     user = request.user
     student = Student.objects.get(user=user)
 
-    if student.completed_survey == True:
-        return redirect(reverse('StudentConnect:myMatches'))
-
-    questions = Question.objects.all()
-    questions_and_choices = {}
-    for question in questions:
-        questions_and_choices[question] = Choice.objects.filter(question=question)
     if request.method == 'POST':
         first_question = True
         for choice_id in request.POST.values():
@@ -135,7 +128,16 @@ def findMatches(request):
                 a.save()
         print(request.POST)
         student.completed_survey = True
-    student.save()
+        student.save()
+
+    if student.completed_survey == True:
+        return redirect(reverse('StudentConnect:myMatches'))
+
+    questions = Question.objects.all()
+    questions_and_choices = {}
+    for question in questions:
+        questions_and_choices[question] = Choice.objects.filter(question=question)
+    
 
     return render(request, 'StudentConnect/findMatches.html',
                   context={'questions_and_choices': questions_and_choices})

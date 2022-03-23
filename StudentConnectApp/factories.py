@@ -1,3 +1,4 @@
+import random
 import factory
 from factory.django import DjangoModelFactory
 from django.db.models.signals import post_save
@@ -12,7 +13,8 @@ class StudentFactory(DjangoModelFactory):
     user = factory.SubFactory('StudentConnectApp.factories.UserFactory', profile=None)
     forename = factory.Faker("first_name")
     surname = factory.Faker("last_name")
-    date_of_birth = factory.Faker("date_of_birth")
+    date_of_birth = factory.Faker("date_of_birth", minimum_age=17, maximum_age=25)
+    city = random.choice(['Aberdeen', 'Glasgow', 'Edinburgh', 'Inverness'])
 
 @factory.django.mute_signals(post_save)
 class UserFactory(DjangoModelFactory):
