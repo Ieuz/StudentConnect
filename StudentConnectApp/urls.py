@@ -10,6 +10,7 @@ urlpatterns=[
     path('Home/', views.Home, name="Home"),
     path('myMatches/', views.MyMatches, name="myMatches"),
     path('findMatches/', views.findMatches, name='findMatches'),
+    path('loadingMatches/', views.loadingMatches, name='loadMatches'),
     path('Help/', views.Help, name='Help'),
     path('Signup/', views.Signup, name='Signup'),
     path('Profile/', views.Profile, name='Profile'),

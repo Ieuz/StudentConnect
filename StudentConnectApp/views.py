@@ -34,20 +34,29 @@ def Home(request):
     return render(request, 'StudentConnect/home.html', context=context_dict)
 
 
+@login_required
+def loadingMatches(request):
+    user = request.user
+    student = Student.objects.get(user=user)
+
+    loadMatches(student)
+
+    return render(request, 'StudentConnect/myMatches.html')
+
+
+
 # view function for My Matches page
 @login_required
 def MyMatches(request):
     user = request.user
     student = Student.objects.get(user=user)
 
-    loadMatches(student)
-
-    """
-
     if student.matches_ready == False:
-        return render(request, 'StudentConnect/waitPage.html')"""
-    context_dict = {}
-    return render(request, 'StudentConnect/myMatches.html', context=context_dict)
+        student.matches_ready = True
+        student.save()
+        return render(request, 'StudentConnect/waitPage.html')
+
+    return render(request, 'StudentConnect/myMatches.html')
 
 
 # view function for My Matches page
