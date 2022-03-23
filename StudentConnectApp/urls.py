@@ -11,10 +11,9 @@ urlpatterns=[
     path('myMatches/', views.MyMatches, name="myMatches"),
     path('findMatches/', views.findMatches, name='findMatches'),
     path('loadingMatches/', views.loadingMatches, name='loadMatches'),
+    path('Profile/<username>/', views.otherProfiles, name='otherProfiles'),
     path('Help/', views.Help, name='Help'),
     path('Signup/', views.Signup, name='Signup'),
-    path('Profile/', views.Profile, name='Profile'),
-    #add more urls here please
     path('register/', views.register, name='register'),
     path('login/', views.user_login, name='login'),
     path('restricted/', views.restricted, name='restricted'),

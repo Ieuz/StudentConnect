@@ -6,14 +6,10 @@
 {% endblock %}
 
 {% block body_block %}
-    <p> This will be the Profile page. </p>
-
     <div class="float-left">
-        <h1 class="">My Account</h1>
+        <h1 class="">{{ userInfo.forename }} {{userInfo.surname }}</h1>
         
             <ul class="lead">
-                <li>Forename: {{ userInfo.forename }}</li>
-                <li>Surname: {{ userInfo.surname }}</li>
                 <li>Date of Birth: {{ userInfo.date_of_birth }}</li>
                 <li>City: {{ userInfo.city }}</li>
                 <p>Matches:</p>

@@ -17,14 +17,12 @@ def index(request):
 # view function for MyAccount page
 @login_required
 def MyAccount(request):
-    loggedInUser=request.user.username
-
-    exampleUser = User.objects.get(username=loggedInUser)
-    userList= Student.objects.get(user = exampleUser)
+    user = request.user
+    student = Student.objects.get(user=user)
 
 
     context_dict = {}
-    context_dict['userInfo']=userList
+    context_dict['userInfo']=student
     return render(request, 'StudentConnect/myAccount.html', context=context_dict)
 
 
@@ -55,9 +53,17 @@ def MyMatches(request):
         student.matches_ready = True
         student.save()
         return render(request, 'StudentConnect/waitPage.html')
+    context_dict = {}
+    context_dict['userInfo']=student
+    return render(request, 'StudentConnect/myMatches.html', context_dict)
 
-    return render(request, 'StudentConnect/myMatches.html')
+@login_required
+def otherProfiles(request, username):
+    user = User.objects.get(username=username)
+    sought_user = Student.objects.get(user=user)
 
+    context_dict = {'userInfo':sought_user}
+    return render(request, 'StudentConnect/profile.html', context=context_dict)
 
 # view function for My Matches page
 def Login(request):
@@ -75,9 +81,6 @@ def Signup(request):
     return render(request, 'StudentConnect/signup.html', context=context_dict)
 
 
-def Profile(request):
-    context_dict = {}
-    return render(request, 'StudentConnect/profile.html', context=context_dict)
 
 @login_required
 def editMyAccount(request):

@@ -16,13 +16,6 @@
             <li>Surname: {{ userInfo.surname }}</li>
             <li>Date of Birth: {{ userInfo.date_of_birth }}</li>
             <li>City: {{ userInfo.city }}</li>
-            <p>Matches:</p>
-            <ul>
-                {% for match in userInfo.matches.all %}
-                <li>{{ match }}</li>
-                {% endfor %}
-            </ul>
-            <li>Instagram username: {{ userInfo.instagram_username }}</li>
         </ul>
         <a href="https://instagram.com/{{ userInfo.instagram_username }}" class="float-left" target="_blank">
             <ion-icon name="logo-instagram" size="large"></ion-icon>
