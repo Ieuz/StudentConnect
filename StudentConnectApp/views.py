@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from StudentConnectApp.forms import StudentForm, StudentProfileForm, StudentProfileEditForm
+from StudentConnectApp.forms import StudentForm, StudentProfileForm, StudentProfileEditForm, ResetPasswordUser, ResetPasswordStudent
 from StudentConnectApp.models import Choice, Question, Answer, Student
 
 
@@ -79,12 +79,23 @@ def editMyAccount(request):
 
 def forgotPassword(request):
     context_dict = {}
+
+    if ResetPasswordUser.is_valid() and ResetPasswordStudent.is_valid():
+        username = ResetPasswordUser.save()
+        user = authenticate(username=username)
+
+        if user:
+            question = ResetPasswordStudent.save()
+        else:
+            return HttpResponse("Invalid username.")
+
     return render(request, 'StudentConnect/forgotPassword.html', context=context_dict)
 
 @login_required
 def findMatches(request):
     user = request.user
     student = Student.objects.get(user=user)
+
     if student.completed_survey == True:
         print("lol")
         return redirect(reverse('StudentConnect:myMatches'))
@@ -102,8 +113,7 @@ def findMatches(request):
                 a = Answer.objects.get_or_create(student=student, choice=Choice.objects.get(id=choice_id))[0]
                 a.save()
         print(request.POST)
-
-    student.completed_survey = True
+        student.completed_survey = True
     student.save()
 
     return render(request, 'StudentConnect/findMatches.html',
