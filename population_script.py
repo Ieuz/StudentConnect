@@ -40,7 +40,7 @@ def add_choice(question, text):
 def create_students():
     Student.objects.all().delete()
     students = []
-    for i in range(0, 50):
+    for i in range(0, 100):
         student = StudentFactory()
         students.append(student)
         create_answers(student)
@@ -48,7 +48,7 @@ def create_students():
 def create_answers(student):
     for question in Question.objects.all():
         available_choices = Choice.objects.filter(question=question)
-        random_id = random.randint(0, available_choices.count()-1)
+        random_id = random.randint(0, (available_choices.count()-1)//3)
         provided_answer = available_choices[random_id]
         add_answer(student, provided_answer)
 
