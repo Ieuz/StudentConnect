@@ -1,37 +1,14 @@
-{% extends 'StudentConnect/base.html' %}
+{% extends 'StudentConnect/profileBase.html' %}
 {% load staticfiles %}
 
 {% block title_block %}
     Profile
 {% endblock %}
-
-{% block body_block %}
-    <div class="float-left">
-        <h1 class="">{{ userInfo.forename }} {{userInfo.surname }}</h1>
-        
-            <ul class="lead">
-                <li>Date of Birth: {{ userInfo.date_of_birth }}</li>
-                <li>City: {{ userInfo.city }}</li>
-            </ul>
-            {% if userInfo.instagram_username %}
-            <a href="https://instagram.com/{{ userInfo.instagram_username }}" class="float-left" target="_blank">
-                <ion-icon name="logo-instagram" size="large"></ion-icon>
-            </a>
-            {% endif %}
-            
-        </div>
+{% block headline_block %}
+<h1 class="">{{ userInfo.forename }} {{userInfo.surname }}</h1> 
+{% endblock %}
+{% block profile_block %}    
     
-        <div class="lead float-right">
-            {% if userInfo.picture %}
-            <img src="{{ MEDIA_URL }}{{ userInfo.picture }}" alt="Profile pic" width=30% height=auto>
-            {% else %} 
-            <img src="{% static 'images/blankProfile.png' %}" alt="Profile pic" width=30% height=auto>
-            {% endif %}
-        </div>
-    
-    
-        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    
+          
 
 {% endblock %}
