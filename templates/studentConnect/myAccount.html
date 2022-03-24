@@ -24,8 +24,11 @@
     </div>
 
     <div class="lead float-right">
-        <li>Profile Picture: </li>
-        <img src="{{ MEDIA_URL }}{{ userInfo.picture }}" alt="Profile pic" width=30% height=auto>
+        {% if userInfo.picture %}
+            <img src="{{ MEDIA_URL }}{{ userInfo.picture }}" alt="Profile pic" width=30% height=auto>
+        {% else %} 
+            <img src="{% static 'images/blankProfile.png' %}" alt="Profile pic" width=30% height=auto>
+        {% endif %}
     </div>
 
     <div class="container-fluid p-3 float-left">
