@@ -40,7 +40,7 @@ def add_choice(question, text):
 def create_students():
     Student.objects.all().delete()
     students = []
-    for i in range(0, 100):
+    for i in range(0, 150):
         student = StudentFactory()
         students.append(student)
         create_answers(student)

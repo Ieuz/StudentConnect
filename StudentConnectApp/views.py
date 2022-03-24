@@ -50,6 +50,8 @@ def MyMatches(request):
     user = request.user
     student = Student.objects.get(user=user)
 
+    if student.completed_survey == False:
+        return redirect(reverse('StudentConnect:findMatches'))
     if student.matches_ready == False:
         student.matches_ready = True
         student.save()
