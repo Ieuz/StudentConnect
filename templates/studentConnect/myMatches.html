@@ -7,9 +7,8 @@
 
 {% block body_block %}
 <!--    <meta http-equiv="X-UA-Compatible" content = "IE=edge">-->
-    <p> This will be My Matches Page </p>
-    <p>Matches:</p>
-    <ul>
+    <h1 class="">Matches:</h1>
+    <ul class="lead">
         {% for match in userInfo.matches.all %}
         <li><a href="{% url 'StudentConnect:otherProfiles' match.user.username %}">{{ match }}</a></li>
         {% endfor %}

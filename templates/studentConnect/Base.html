@@ -47,13 +47,13 @@
             	{% endif %}
            </nav>
 
-        <div class="container-fluid">
+        <div class="container-fluid mb-5">
             {% block body_block %}
             {% endblock %}
         </div>
 
         <!--Bottom Navbar -->
-        <footer class="navbar navbar-expand-sm bg-secondary bottom">
+        <footer class="navbar navbar-expand-sm bg-secondary fixed-bottom">
         	<img src="{{ MEDIA_URL}}logo.png" alt="Logo" width=4% height=auto>
             <a class="text-white nav-link" href="{% url 'StudentConnect:Help' %}" >Help?</a></button>
         </footer>
