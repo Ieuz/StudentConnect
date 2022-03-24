@@ -20,6 +20,12 @@
     {{ user_form.as_p }}
     {{ profile_form.as_p }}
 
+    {% if messages %}
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+    {% endif %}
+
     <!-- Provide a button to click to submit the form. -->
     <input type="submit" name="submit" value="Register" />
 </form>

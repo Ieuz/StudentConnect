@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from StudentConnectApp.forms import StudentForm, StudentProfileForm, StudentProfileEditForm, ResetPasswordUser, ResetPasswordStudent
 from StudentConnectApp.loadMatches import loadMatches
 from StudentConnectApp.models import Choice, Question, Answer, Student
+from django.contrib import messages
 
 
 def index(request):
@@ -155,21 +156,22 @@ def register(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_email = user_form.cleaned_data['email']
             if '@student.' not in user_email:
-                raise ValueError('Invalid Email')
+               messages.error(request, 'Invalid email. Please enter a valid student email.')
+            else: 
                 
-            user = user_form.save()
+                user = user_form.save()
 
-            user.set_password(user.password)
-            user.save()
+                user.set_password(user.password)
+                user.save()
 
-            profile = profile_form.save(commit=False)
-            profile.user = user
-            if 'picture' in request.FILES:
-                profile.picture = request.FILES['picture']
+                profile = profile_form.save(commit=False)
+                profile.user = user
+                if 'picture' in request.FILES:
+                 profile.picture = request.FILES['picture']
 
-            profile.save()
+                profile.save()
 
-            registered = True
+                registered = True
 
         else:
             print(user_form.errors, profile_form.errors)
