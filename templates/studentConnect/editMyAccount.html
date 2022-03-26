@@ -7,7 +7,7 @@
 
 {% block body_block %}
     <h1>Update account details...</h1>
-    <form action="" method=POST>
+    <form action="{% url 'StudentConnect:editMyAccount' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p}}
         <br/>

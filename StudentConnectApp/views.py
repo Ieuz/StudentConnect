@@ -43,8 +43,6 @@ def loadingMatches(request):
 
     return render(request, 'StudentConnect/myMatches.html')
 
-
-
 # view function for My Matches page
 @login_required
 def MyMatches(request):
@@ -74,29 +72,36 @@ def Login(request):
     context_dict = {}
     return render(request, 'StudentConnect/login.html', context=context_dict)
 
-
 def Help(request):
     context_dict = {}
     return render(request, 'StudentConnect/help.html', context=context_dict)
-
 
 def Signup(request):
     context_dict = {}
     return render(request, 'StudentConnect/signup.html', context=context_dict)
 
-
-
 @login_required
 def editMyAccount(request):
     loggedInUser=request.user.username
-
+    
     exampleUser = User.objects.get(username=loggedInUser)
     userList= Student.objects.get(user = exampleUser)
+    form = StudentProfileEditForm(instance=userList)
 
-    form = StudentProfileEditForm(request.POST or None, instance=userList)
-    if form.is_valid():
-        form.save()
-        return redirect(reverse('StudentConnect:myAccount'))
+    if request.method == "POST":
+        form = StudentProfileEditForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+            profile = form.save(commit=False)
+            #profile.user = exampleUser
+            print(request.FILES)
+            if 'picture' in request.FILES:
+                print("saving")
+                profile.picture = request.FILES['picture']
+            profile.save()
+
+            return redirect(reverse('StudentConnect:myAccount'))
 
     context_dict = {}
     context_dict['userInfo']=userList
@@ -196,9 +201,6 @@ def findMatches(request):
     return render(request, 'StudentConnect/findMatches.html',
                   context={'questions_and_choices': questions_and_choices})
 
-
-# register method taken from Tango with Django Chapter 9 - Euan
-
 def register(request):
     registered = False
 
@@ -220,7 +222,7 @@ def register(request):
                 profile = profile_form.save(commit=False)
                 profile.user = user
                 if 'picture' in request.FILES:
-                 profile.picture = request.FILES['picture']
+                    profile.picture = request.FILES['picture']
 
                 profile.save()
 
@@ -238,7 +240,6 @@ def register(request):
                   context={'user_form': user_form,
                            'profile_form': profile_form,
                            'registered': registered})
-
 
 def user_login(request):
     if request.method == 'POST':
@@ -259,7 +260,6 @@ def user_login(request):
     else:
         return render(request, 'StudentConnect/login.html')
 
-
 # Changed logout to redirect to home rather than index
 @login_required
 def user_logout(request):
@@ -267,7 +267,3 @@ def user_logout(request):
     # return redirect(reverse('StudentConnect:index'))
     return redirect(reverse('StudentConnect:Home'))
 
-
-@login_required
-def restricted(request):
-    return render(request, 'StudentConnect/restricted.html')
