@@ -4,6 +4,12 @@
 <html>
 
     <head>
+
+        <style>
+p.pad {
+  padding-top: 5%;
+}
+</style>
         {% block meta_block %}
         
         {% endblock %}
@@ -47,11 +53,12 @@
             	{% endif %}
            </nav>
 
+
         <div class="container-fluid p-5">
-            <p> </p>
+            <p class="pad"> </p>
             {% block body_block %}
             {% endblock %}
-            <p> </p>
+            <p class="pad"> </p>
         </div>
 
         <!--Bottom Navbar -->
