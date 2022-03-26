@@ -4,7 +4,8 @@ from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from StudentConnectApp.forms import StudentForm, StudentProfileForm, StudentProfileEditForm, ResetPasswordUser, ResetPasswordStudent
+from StudentConnectApp.forms import StudentForm, StudentProfileForm, StudentProfileEditForm,\
+    ResetPasswordUser, ResetPasswordStudent, EnterNewPassword
 from StudentConnectApp.loadMatches import loadMatches
 from StudentConnectApp.models import Choice, Question, Answer, Student
 from django.contrib import messages
@@ -102,19 +103,60 @@ def editMyAccount(request):
     context_dict['form']=form
     return render(request, 'StudentConnect/editMyAccount.html', context=context_dict)
 
+#dictionary for user info for reset!
+user_info = {'user':'', 'username': '', 'user_q':'', 'user_a':''}
+
 def forgotPassword(request):
-    context_dict = {}
 
-    if ResetPasswordUser.is_valid() and ResetPasswordStudent.is_valid():
-        username = ResetPasswordUser.save()
-        user = authenticate(username=username)
+    print(request.POST)
 
-        if user:
-            question = ResetPasswordStudent.save()
-        else:
-            return HttpResponse("Invalid username.")
+    userpass_form = ResetPasswordUser(request.POST)
+    student_form = ResetPasswordStudent(request.POST)
+    newPass_form = EnterNewPassword(request.POST)
+    user_q = user_info['user_q']
+    user_a = user_info['user_a']
+    username = user_info['username']
+    user = user_info['user']
+    user_exists = False
+    correct_answer = False
+    submit_newPassword = False
 
-    return render(request, 'StudentConnect/forgotPassword.html', context=context_dict)
+    if 'submit_user' in request.POST:
+        username = request.POST.get('username')
+
+        if User.objects.filter(username=username).exists():
+            user_exists = True
+            user = User.objects.get(username=username)
+            user_q = Student.objects.get(user=user).security_question
+            user_a = Student.objects.get(user=user).security_answer
+            addUser_info(user, username, user_q, user_a)
+
+    if 'submit_answer' in request.POST:
+
+        user_exists = True
+        answer = request.POST.get('security_answer')
+        if answer == user_a:
+            correct_answer = True
+
+    if 'submit_newPassword' in request.POST:
+        new_password = request.POST.get('new_password')
+        user.set_password(new_password)
+        user.save()
+        submit_newPassword = True
+
+
+    return render(request, 'StudentConnect/forgotPassword.html',
+                  context={'userpass_form': userpass_form, 'user_exists':user_exists, 'student_form':student_form,
+                           'user_q':user_q, 'user_a':user_a, 'correct_answer': correct_answer, 'username':username,
+                           'submit_newPassword':submit_newPassword, 'newPass_form':newPass_form})
+
+
+def addUser_info(user, username, user_q, user_a):
+    user_info['user'] = user
+    user_info['username'] = username
+    user_info['user_q'] = user_q
+    user_info['user_a'] = user_a
+
 
 @login_required
 def findMatches(request):

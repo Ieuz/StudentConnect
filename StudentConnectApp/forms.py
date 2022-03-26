@@ -29,3 +29,8 @@ class ResetPasswordStudent(forms.ModelForm):
     class Meta:
         model = Student
         fields = ('security_question', 'security_answer')
+
+class EnterNewPassword(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('password',)
