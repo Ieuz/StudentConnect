@@ -13,7 +13,7 @@ class StudentProfileForm(forms.ModelForm):
     class Meta:
         model = Student
         fields = ('forename', 'surname','date_of_birth', 'city','security_question',
-        'security_answer', 'picture')
+        'security_answer', 'picture', 'instagram_username', 'facebook_username')
 
 class StudentProfileEditForm(forms.ModelForm):
     class Meta:

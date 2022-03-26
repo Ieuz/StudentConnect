@@ -39,6 +39,7 @@ class Student(models.Model):
 
     bio = models.TextField(max_length=1500, null=True, blank=True)
     instagram_username = models.CharField(max_length=30, null=True, blank=True)
+    facebook_username = models.CharField(max_length=30, null=True, blank=True)
 
     def __str__(self):
         return f"{self.forename} {self.surname}"
