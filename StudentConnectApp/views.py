@@ -103,7 +103,7 @@ def editMyAccount(request):
     context_dict['form']=form
     return render(request, 'StudentConnect/editMyAccount.html', context=context_dict)
 
-#dictionary for user info for reset!
+#dictionary for user info for password reset!
 user_info = {'user':'', 'username': '', 'user_q':'', 'user_a':''}
 
 def forgotPassword(request):
@@ -118,18 +118,23 @@ def forgotPassword(request):
     username = user_info['username']
     user = user_info['user']
     user_exists = False
+    user_notExists = False
     correct_answer = False
     submit_newPassword = False
+    wrong_answer = False
 
     if 'submit_user' in request.POST:
         username = request.POST.get('username')
 
         if User.objects.filter(username=username).exists():
             user_exists = True
+            user_notExists = False
             user = User.objects.get(username=username)
-            user_q = Student.objects.get(user=user).security_question
+            user_q = Student.objects.get(user=user).get_security_question_display
             user_a = Student.objects.get(user=user).security_answer
             addUser_info(user, username, user_q, user_a)
+        else:
+            user_notExists = True
 
     if 'submit_answer' in request.POST:
 
@@ -137,6 +142,9 @@ def forgotPassword(request):
         answer = request.POST.get('security_answer')
         if answer == user_a:
             correct_answer = True
+            wrong_answer = False
+        else:
+            wrong_answer = True
 
     if 'submit_newPassword' in request.POST:
         new_password = request.POST.get('new_password')
@@ -148,14 +156,15 @@ def forgotPassword(request):
     return render(request, 'StudentConnect/forgotPassword.html',
                   context={'userpass_form': userpass_form, 'user_exists':user_exists, 'student_form':student_form,
                            'user_q':user_q, 'user_a':user_a, 'correct_answer': correct_answer, 'username':username,
-                           'submit_newPassword':submit_newPassword, 'newPass_form':newPass_form})
+                           'submit_newPassword':submit_newPassword, 'newPass_form':newPass_form,'wrong_answer':wrong_answer,
+                           'user_notExists':user_notExists})
 
 
 def addUser_info(user, username, user_q, user_a):
-    user_info['user'] = user
-    user_info['username'] = username
-    user_info['user_q'] = user_q
-    user_info['user_a'] = user_a
+    user_info['user'] = user #user object
+    user_info['username'] = username #user username
+    user_info['user_q'] = user_q #user question
+    user_info['user_a'] = user_a #user answer
 
 
 @login_required
