@@ -15,16 +15,50 @@
     		StudentConnect today and start matching!</Strong>
     	</p>
     </div>
-    <div class="float-right">
-    	<img src="{{ MEDIA_URL}}StudentConnect.png" alt="Logo" width=80% height=auto>
+    <div class="float-right m-1">
+    	<img src="{{ MEDIA_URL}}StudentConnect.png" alt="Logo" class="image-fluid" width=80% height=auto>
     </div>
 
-    <div class="container float-left">
+    <div class="container float-left m-1">
 	{% if not user.is_authenticated %}
     <a class="text-white" href="{% url 'StudentConnect:register' %}"><button type="button" class="btn btn-info btn-lg">Register</button></a>
     <a class="text-white" href="{% url 'StudentConnect:login' %}"><button type="button" class="btn btn-info btn-lg">Login</button></a>
 	{% else %}
 	<a class="text-white" href="{% url 'StudentConnect:findMatches' %}"><button type="button" class="btn btn-info btn-lg">Find my Matches!</button></a>
     {% endif %}
+	</div>
+
+	<!-- bootstrap javascript carousel -->
+	<div class="container mb-5">
+		<div id="homeCarousel" class="carousel slide" data-ride="carousel" height="50px">
+			<ul class="carousel-indicators">
+			<li data-target="#homeCarousel" data-slide-to="0" class="active"></li>
+			<li data-target="#homeCarousel" data-slide-to="1"></li>
+			<li data-target="#homeCarousel" data-slide-to="2"></li>
+			</ul>
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img src="{{ MEDIA_URL}}glasgowUniversity.jpg" class="image-fluid" alt="Los Angeles" width="100%" height="100%" >
+					<div class="carousel-caption">
+					<h3>Glasgow Univercity</h3>
+					
+					</div>   
+				</div>
+
+				<div class="carousel-item">
+					<img src="{{ MEDIA_URL}}strathclydeUniversity.jpg" class="image-fluid" alt="Chicago" width="100%" height="100%" >
+					<div class="carousel-caption">
+					<h3>Strathclyde Univercity</h3>
+					</div>   
+				</div>
+
+				<div class="carousel-item">
+					<img src="{{ MEDIA_URL}}caledonianUniversity.jpg" class="image-fluid" alt="New York" width="100%" height="100%">
+					<div class="carousel-caption">
+					<h3>Caledonian Univercity</h3>
+					</div>   
+				</div>
+			</div>
+		</div>
 	</div>
 {% endblock %}

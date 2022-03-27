@@ -55,6 +55,7 @@ def MyMatches(request):
         student.matches_ready = True
         student.save()
         return render(request, 'StudentConnect/waitPage.html')
+
     context_dict = {}
     context_dict['userInfo']=student
     return render(request, 'StudentConnect/myMatches.html', context_dict)
@@ -227,6 +228,7 @@ def register(request):
                 profile.save()
 
                 registered = True
+                login(request, user)
 
                 login(request, user)
 
