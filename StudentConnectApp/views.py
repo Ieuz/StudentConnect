@@ -230,6 +230,8 @@ def register(request):
                 registered = True
                 login(request, user)
 
+                login(request, user)
+
         else:
             print(user_form.errors, profile_form.errors)
 
