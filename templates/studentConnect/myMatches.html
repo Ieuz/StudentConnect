@@ -12,7 +12,7 @@
         {% for match in userInfo.matches.all %}
         <li><a href="{% url 'StudentConnect:otherProfiles' match.user.username %}">{{ match }}</a></li>
         {% empty %}
-        <li>Oh no you have no matches! You might have not answered the questions!</li>
+        <li>Oh no you have no matches! You might have not answered the questions or need to reload the page!</li>
         <button type="button" class="btn btn-info btn-lg">
             <a class="text-white" href="{% url 'StudentConnect:findMatches' %}">
                 Click here to find your Matches!

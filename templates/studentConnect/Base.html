@@ -5,11 +5,6 @@
 
     <head>
 
-        <style>
-p.pad {
-  padding-top: 5%;
-}
-</style>
         {% block meta_block %}
         
         {% endblock %}
@@ -28,42 +23,45 @@ p.pad {
                 Home
             {% endblock %}
         </title>
-    </head>
-    <body class="d-flex flex-column min-vh-100">
-        
+
         <!-- Top nav bar -->
-        <nav class="navbar navbar-expand-sm bg-secondary fixed-top">
-        	<img src="{{ MEDIA_URL}}logo.png" alt="Logo" width=4% height=auto>
-        	
-	            {% if user.is_authenticated %}
-	            <div>
-	            <button type="button" class="btn btn-info navbar-btn"><a class="nav-link text-white" href="{% url 'StudentConnect:Home' %}">Home</a></button>
-	            <button type="button" class="btn btn-info navbar-btn"><a class="nav-link text-white" href="{% url 'StudentConnect:myAccount' %}">My Account</a></button>
-	            <button type="button" class="btn btn-info navbar-btn"><a class="nav-link text-white" href="{% url 'StudentConnect:myMatches' %}">My Matches</a></button>
-	            </div>
-	            <div class="ml-auto">
-	            <span class="navbar-text">Welcome back to Student Connect {{ user.username }}</span>
-	            <button type="button" class="btn btn-info navbar-btn"><a class="nav-link text-white" href="{% url 'StudentConnect:logout' %}">Logout</a></button>
-	            </div>
-	            {% else %}
-	            <button type="button" class="btn btn-info navbar-btn"><a class="nav-link text-white" href="{% url 'StudentConnect:Home' %}">Home</a></button>
-	            <div class="ml-auto">
-	            <button type="button" class="btn btn-info navbar-btn"><a class="nav-link text-white" href="{% url 'StudentConnect:login' %}">Login</a></button>
-            	</div>
-            	{% endif %}
-           </nav>
+        <nav class="navbar container-fluid navbar-expand-sm bg-secondary float-none">
+            <img src="{{ MEDIA_URL}}StudentConnect.png" alt="Logo" width=4% height=auto class="pr-1">
+            
+                {% if user.is_authenticated %}
+                <div>
+                <button type="button" class="btn btn-info navbar-btn btn-sm"><a class="nav-link text-white" href="{% url 'StudentConnect:Home' %}">Home</a></button>
+                <button type="button" class="btn btn-info navbar-btn btn-sm"><a class="nav-link text-white" href="{% url 'StudentConnect:myAccount' %}">My Account</a></button>
+                <button type="button" class="btn btn-info navbar-btn btn-sm"><a class="nav-link text-white" href="{% url 'StudentConnect:myMatches' %}">My Matches</a></button>
+                </div>
+                <div class="ml-auto">
+                <span class="navbar-text">Welcome back to Student Connect {{ user.username }}</span>
+                <button type="button" class="btn btn-info navbar-btn btn-sm"><a class="nav-link text-white" href="{% url 'StudentConnect:logout' %}">Logout</a></button>
+                </div>
+                {% else %}
+                <button type="button" class="btn btn-info navbar-btn btn-sm"><a class="nav-link text-white" href="{% url 'StudentConnect:Home' %}">Home</a></button>
+                <div class="ml-auto">
+                <button type="button" class="btn btn-info navbar-btn btn-sm"><a class="nav-link text-white" href="{% url 'StudentConnect:login' %}">Login</a></button>
+                </div>
+                {% endif %}
+        </nav>
+
+    </head>
+    <body class="d-flex flex-column min-vh-100 ">
+        
 
 
-        <div class="container-fluid p-5">
-            <p class="pad"> </p>
+
+        <div class="container-fluid float-left ">
+            
             {% block body_block %}
             {% endblock %}
-            <p class="pad"> </p>
+            <p style="padding-top: 5%;">
         </div>
 
         <!--Bottom Navbar -->
         <footer class="navbar navbar-expand-sm bg-secondary fixed-bottom mt-5">
-        	<img src="{{ MEDIA_URL}}logo.png" alt="Logo" width=4% height=auto>
+        	<img src="{{ MEDIA_URL}}StudentConnect.png" alt="Logo" width=4% height=auto>
             <a class="text-white nav-link" href="{% url 'StudentConnect:Help' %}" >Help?</a></button>
         </footer>
 
