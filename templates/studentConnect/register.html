@@ -9,6 +9,7 @@
 <h1>Register for StudentConnect</h1>
 {% if registered %}
 <strong>thank you for registering!</strong>
+<meta http-equiv="refresh" content="5;url='{% url 'StudentConnect:Home' %}'" />
 {% else %}
 <strong>register here!</strong><br />
 <form id="student_form" method="post" action="{% url 'StudentConnect:register' %}"
