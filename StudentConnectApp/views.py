@@ -253,12 +253,16 @@ def user_login(request):
                 login(request, user)
                 return redirect(reverse('StudentConnect:index'))
             else:
-                return HttpResponse("Your StudentAccount account is disabled.")
+                messages.error(request, "Your StudentAccount account is disabled.")
         else:
-            print(f"Invalid login details: {username}, {password}")
-            return HttpResponse("Invalid login details supplied.")
+            messages.error(request, f"Invalid login details: {username}, {password}")
     else:
-        return render(request, 'StudentConnect/login.html')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+    return render(request, 'StudentConnect/login.html',
+                    context={'username': username,
+                            'password': password})
 
 # Changed logout to redirect to home rather than index
 @login_required
