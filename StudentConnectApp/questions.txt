@@ -200,13 +200,13 @@
    7. Politician 
    8. Policeman
 19. What age would you like to live till?
-   1. 60
-   2. 80
-   3. 90
-   4. 30
-   5. 27
-   6. 42
-   7. 20
+   1. 20
+   2. 27
+   3. 30
+   4. 42
+   5. 60
+   6. 80
+   7. 90
    8. 100
 20. What are you most likely to become famous for?
    1. Becoming  a meme
