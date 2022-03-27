@@ -4,7 +4,7 @@ body {
   }
   
   .topnav {
-    overflow: hidden;
+    overflow: scroll;
     background-color: darkslategrey;
   }
   .topnav .login {
@@ -14,6 +14,7 @@ body {
     float: left;
     color: #f2f2f2;
     text-align: center;
+    padding-topnav: 16px
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
@@ -40,7 +41,7 @@ body {
   }
 
   .botnav {
-      overflow: hidden;
+      overflow: scroll;
       background-color: #333;
       position: fixed;
       bottom: 0;

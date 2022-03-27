@@ -4,7 +4,8 @@ from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from StudentConnectApp.forms import StudentForm, StudentProfileForm, StudentProfileEditForm, ResetPasswordUser, ResetPasswordStudent
+from StudentConnectApp.forms import StudentForm, StudentProfileForm, StudentProfileEditForm,\
+    ResetPasswordUser, ResetPasswordStudent, EnterNewPassword
 from StudentConnectApp.loadMatches import loadMatches
 from StudentConnectApp.models import Choice, Question, Answer, Student
 from django.contrib import messages
@@ -42,14 +43,14 @@ def loadingMatches(request):
 
     return render(request, 'StudentConnect/myMatches.html')
 
-
-
 # view function for My Matches page
 @login_required
 def MyMatches(request):
     user = request.user
     student = Student.objects.get(user=user)
 
+    if student.completed_survey == False:
+        return redirect(reverse('StudentConnect:findMatches'))
     if student.matches_ready == False:
         student.matches_ready = True
         student.save()
@@ -71,48 +72,105 @@ def Login(request):
     context_dict = {}
     return render(request, 'StudentConnect/login.html', context=context_dict)
 
-
 def Help(request):
     context_dict = {}
     return render(request, 'StudentConnect/help.html', context=context_dict)
-
 
 def Signup(request):
     context_dict = {}
     return render(request, 'StudentConnect/signup.html', context=context_dict)
 
-
-
 @login_required
 def editMyAccount(request):
     loggedInUser=request.user.username
-
+    
     exampleUser = User.objects.get(username=loggedInUser)
     userList= Student.objects.get(user = exampleUser)
+    form = StudentProfileEditForm(instance=userList)
 
-    form = StudentProfileEditForm(request.POST or None, instance=userList)
-    if form.is_valid():
-        form.save()
-        return redirect(reverse('StudentConnect:myAccount'))
+    if request.method == "POST":
+        form = StudentProfileEditForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+            profile = form.save(commit=False)
+            #profile.user = exampleUser
+            print(request.FILES)
+            if 'picture' in request.FILES:
+                print("saving")
+                profile.picture = request.FILES['picture']
+            profile.save()
+
+            return redirect(reverse('StudentConnect:myAccount'))
 
     context_dict = {}
     context_dict['userInfo']=userList
     context_dict['form']=form
     return render(request, 'StudentConnect/editMyAccount.html', context=context_dict)
 
+#dictionary for user info for password reset!
+user_info = {'user':'', 'username': '', 'user_q':'', 'user_a':''}
+
 def forgotPassword(request):
-    context_dict = {}
 
-    if ResetPasswordUser.is_valid() and ResetPasswordStudent.is_valid():
-        username = ResetPasswordUser.save()
-        user = authenticate(username=username)
+    print(request.POST)
 
-        if user:
-            question = ResetPasswordStudent.save()
+    userpass_form = ResetPasswordUser(request.POST)
+    student_form = ResetPasswordStudent(request.POST)
+    newPass_form = EnterNewPassword(request.POST)
+    user_q = user_info['user_q']
+    user_a = user_info['user_a']
+    username = user_info['username']
+    user = user_info['user']
+    user_exists = False
+    user_notExists = False
+    correct_answer = False
+    submit_newPassword = False
+    wrong_answer = False
+
+    if 'submit_user' in request.POST:
+        username = request.POST.get('username')
+
+        if User.objects.filter(username=username).exists():
+            user_exists = True
+            user_notExists = False
+            user = User.objects.get(username=username)
+            user_q = Student.objects.get(user=user).get_security_question_display
+            user_a = Student.objects.get(user=user).security_answer
+            addUser_info(user, username, user_q, user_a)
         else:
-            return HttpResponse("Invalid username.")
+            user_notExists = True
 
-    return render(request, 'StudentConnect/forgotPassword.html', context=context_dict)
+    if 'submit_answer' in request.POST:
+
+        user_exists = True
+        answer = request.POST.get('security_answer')
+        if answer == user_a:
+            correct_answer = True
+            wrong_answer = False
+        else:
+            wrong_answer = True
+
+    if 'submit_newPassword' in request.POST:
+        new_password = request.POST.get('new_password')
+        user.set_password(new_password)
+        user.save()
+        submit_newPassword = True
+
+
+    return render(request, 'StudentConnect/forgotPassword.html',
+                  context={'userpass_form': userpass_form, 'user_exists':user_exists, 'student_form':student_form,
+                           'user_q':user_q, 'user_a':user_a, 'correct_answer': correct_answer, 'username':username,
+                           'submit_newPassword':submit_newPassword, 'newPass_form':newPass_form,'wrong_answer':wrong_answer,
+                           'user_notExists':user_notExists})
+
+
+def addUser_info(user, username, user_q, user_a):
+    user_info['user'] = user #user object
+    user_info['username'] = username #user username
+    user_info['user_q'] = user_q #user question
+    user_info['user_a'] = user_a #user answer
+
 
 @login_required
 def findMatches(request):
@@ -143,9 +201,6 @@ def findMatches(request):
     return render(request, 'StudentConnect/findMatches.html',
                   context={'questions_and_choices': questions_and_choices})
 
-
-# register method taken from Tango with Django Chapter 9 - Euan
-
 def register(request):
     registered = False
 
@@ -167,7 +222,7 @@ def register(request):
                 profile = profile_form.save(commit=False)
                 profile.user = user
                 if 'picture' in request.FILES:
-                 profile.picture = request.FILES['picture']
+                    profile.picture = request.FILES['picture']
 
                 profile.save()
 
@@ -185,7 +240,6 @@ def register(request):
                   context={'user_form': user_form,
                            'profile_form': profile_form,
                            'registered': registered})
-
 
 def user_login(request):
     if request.method == 'POST':
@@ -206,7 +260,6 @@ def user_login(request):
     else:
         return render(request, 'StudentConnect/login.html')
 
-
 # Changed logout to redirect to home rather than index
 @login_required
 def user_logout(request):
@@ -214,7 +267,3 @@ def user_logout(request):
     # return redirect(reverse('StudentConnect:index'))
     return redirect(reverse('StudentConnect:Home'))
 
-
-@login_required
-def restricted(request):
-    return render(request, 'StudentConnect/restricted.html')
