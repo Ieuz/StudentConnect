@@ -89,7 +89,7 @@ def editMyAccount(request):
     form = StudentProfileEditForm(instance=userList)
 
     if request.method == "POST":
-        form = StudentProfileEditForm(request.POST)
+        form = StudentProfileEditForm(request.POST, instance=userList)
         if form.is_valid():
             form.save()
 

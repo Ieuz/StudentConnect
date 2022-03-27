@@ -9884,4 +9884,8 @@ a.text-dark:hover, a.text-dark:focus {
     border-color: #dee2e6;
   }
 }
+
+.pad {
+  padding-top: 5%;
+  }
 /*# sourceMappingURL=bootstrap.css.map */
