@@ -19,7 +19,7 @@
     <ul class="lead">
         {% for match in userInfo.matches.all %}
 
-        <li><a href="{% url 'StudentConnect:otherProfiles' match.user.username %}"><strong>{{ match }}</strong></a></li>
+        <li><a href="{% url 'StudentConnect:otherProfiles' match.user.username %}" class="text-dark"><strong>{{ match }}</strong></a></li>
         {% empty %}
         <li>Oh no you have no matches! You might have not answered the questions or need to reload the page!</li>
         <button type="button" class="btn btn-info btn-lg">

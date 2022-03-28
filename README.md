@@ -5,7 +5,7 @@ WAD Team Project LB01 Team D
 To install the dependencies, all you have to do is run pip install -r requirements.txt in python shell and all required 
 software will be installed in the needed vesrion.
  
-To allow the web app to run smoothly we must first populate the scrip using the command python population_script.py in 
+To allow the web app to run smoothly we must first populate the script using the command python population_script.py in 
 the command prompt. Once the script has been populated(and all migrations have been made), the web app is fully functional 
 and ready to take in new users.
 
