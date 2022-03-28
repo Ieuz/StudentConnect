@@ -30,7 +30,7 @@
     </div>
 
         {% if userInfo.picture %}
-            <img src="{{ MEDIA_URL }}{{ userInfo.picture }}" alt="Profile pic" width=33% height=auto style="vertical-align:middle;margin:15px 50px;" >
+            <img src="{{ MEDIA_URL }}{{ userInfo.picture }}" alt="Profile pic" width=25% height=auto style="vertical-align:middle;margin:15px 50px;" >
         {% else %} 
             <img src="{% static 'images/blankProfile.png' %}" alt="Profile pic" width=30% height=auto style="vertical-align:middle;margin:15px 50px;">
         {% endif %}

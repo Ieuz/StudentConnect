@@ -13,7 +13,6 @@ urlpatterns=[
     path('loadingMatches/', views.loadingMatches, name='loadMatches'),
     path('Profile/<username>/', views.otherProfiles, name='otherProfiles'),
     path('Help/', views.Help, name='Help'),
-    path('Signup/', views.Signup, name='Signup'),
     path('register/', views.register, name='register'),
     path('login/', views.user_login, name='login'),
     path('logout/', views.user_logout, name='logout'),
