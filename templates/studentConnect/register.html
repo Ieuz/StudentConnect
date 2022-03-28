@@ -12,6 +12,7 @@
 <meta http-equiv="refresh" content="5;url='{% url 'StudentConnect:Home' %}'" />
 {% else %}
 <strong>register here!</strong><br />
+<strong>Please enter your Date of Birth as YYY-MM-DD!</strong><br/>
 <form id="student_form" method="post" action="{% url 'StudentConnect:register' %}"
       enctype="multipart/form-data">
 
